@@ -61,7 +61,9 @@ class AdminOrdersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $order=Ml_pedido::findOrFail($id);
+
+        return view('admin.orders.edit', compact('order'));
     }
 
     /**
@@ -77,7 +79,7 @@ class AdminOrdersController extends Controller
         $order->pedido_profit = $request->pedido_profit;
         $order->save();
 
-        return redirect('/admin/orders/create');
+        return redirect('/admin/orders/aprofit');
     }
 
     /**
@@ -89,5 +91,20 @@ class AdminOrdersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function aprofit()
+    {
+
+        $orders=Ml_pedido::where('pedido_profit', '')->orderBy('fecha', 'asc')->take(1)->get();
+        
+        foreach($orders as $order){
+
+            $id=$order->pedidos_id;
+
+        }
+
+        return redirect('/admin/orders/'.$id.'/edit');
+              
     }
 }

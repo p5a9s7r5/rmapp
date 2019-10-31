@@ -26,5 +26,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('admin/users', 'AdminUsersController')->middleware('auth');
 Route::get('/admin/users/{id}/delete', 'AdminUsersController@delete')->middleware('auth');
 
+Route::get('/admin/orders/aprofit', 'AdminOrdersController@aprofit')->middleware('auth');
 Route::resource('admin/orders', 'AdminOrdersController')->middleware('auth');
-//Route::get('/admin/orders/aprofit', 'AdminOrdersController@aprofit');
+

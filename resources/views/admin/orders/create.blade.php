@@ -24,14 +24,18 @@ Cargar Pedidos Profit
     @if($orders)
         @foreach($orders as $order)
 
-        {!! Form::model($order, ['method' => 'PUT', 'action' => ['AdminOrdersController@update', $order->id]]) !!}
+        {!! Form::model($order, ['method' => 'post', 'action' => ['AdminOrdersController@update', $order->pedido_id]]) !!}
+
+        {!!Form::token()!!}
+        @method('PUT')
+
             <tr height="50">
-             <td>{{$order->codigo_venta}}</td>
-             <td>{{$order->seudonimo}}</td>
-             <td>{{$order->nombre}}</td>
-             <td>{{$order->titulo_publicacion}}</td>
-             <td>{{$order->variacion_nombre}}</td>
-             <td>{{$order->costo}}</td>
+             <td>{!!Form::label('codigo_venta', $order->codigo_venta)!!}</td>
+             <td>{!!Form::label('seudonimo', $order->seudonimo)!!}</td>
+             <td>{!!Form::label('nombre', $order->nombre)!!}</td>
+             <td>{!!Form::label('titulo_publicacion', $order->titulo_publicacion)!!}</td>
+             <td>{!!Form::label('variacion_nombre', $order->variacion_nombre)!!}</td>
+             <td>{!!Form::label('costo', $order->costo)!!}</td>
              <td>{!!Form::text('pedido_profit','')!!}</td>
              <td>{!!Form::submit('Cargar')!!}</td>
             </tr>
