@@ -61,9 +61,13 @@ class AdminOrdersController extends Controller
      */
     public function edit($id)
     {
-        $order=Ml_pedido::findOrFail($id);
+        $order_id=Ml_pedido::findOrFail($id);
 
-        return view('admin.orders.edit', compact('order'));
+        $seudonimo=$order_id['seudonimo'];
+      
+        $orders=Ml_pedido::where('seudonimo', $seudonimo)->orderBy('fecha', 'asc')->get();
+
+        return view('admin.orders.edit', compact('orders'));
     }
 
     /**
@@ -75,8 +79,18 @@ class AdminOrdersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request->estatus = 'Nuevo'){
+
+            $estatus = 'Pendiente';
+
+        }else{
+
+            $estatus = $request->estatus;
+        }
+
         $order = Ml_pedido::findOrFail($id);
         $order->pedido_profit = $request->pedido_profit;
+        $order->estatus = $estatus;
         $order->save();
 
         return redirect('/admin/orders/aprofit');
@@ -103,7 +117,7 @@ class AdminOrdersController extends Controller
             $id=$order->pedidos_id;
 
         }
-
+        
         return redirect('/admin/orders/'.$id.'/edit');
               
     }
