@@ -29,3 +29,7 @@ Route::get('/admin/users/{id}/delete', 'AdminUsersController@delete')->middlewar
 Route::get('/admin/orders/aprofit', 'AdminOrdersController@aprofit')->middleware('auth');
 Route::resource('admin/orders', 'AdminOrdersController')->middleware('auth');
 
+Route::resource('admin/items', 'AdminItemsController')->middleware('auth');
+
+Route::resource('admin/banks', 'AdminBanksController')->middleware('auth');
+

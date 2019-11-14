@@ -9,7 +9,7 @@ Administrador Usuarios
 
 @section("general")
 
-<table width="1000" border="1">
+<table width="1000" border="1" style="margin: 0 auto;">
     <tr height="50">
        <th width="50">Id</th>
        <th width="200">Nombre</th>

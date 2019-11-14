@@ -2,6 +2,10 @@
 
 @section("cabecera")
 
+<div class="volver">
+{{link_to_route('orders.index', 'Ver Pedidos')}}
+</div>
+
 Cargar Pedidos Profit
 
 @endsection
@@ -15,7 +19,8 @@ Cargar Pedidos Profit
        <th>Seudonimo</th>
        <th>Nombre</th>
        <th>Articulo</th>
-       <th>Variacion</th>
+       <th>Codigo Profit</th>
+       <th>Cantidad</th>
        <th>Monto</th>
        <th>Fecha</th>
        <th>Estatus</th>
@@ -42,12 +47,13 @@ Cargar Pedidos Profit
              <td>{!!Form::label('seudonimo', $order->seudonimo)!!}</td>
              <td>{!!Form::label('nombre', $order->nombre)!!}</td>
              <td>{!!Form::label('titulo_publicacion', $order->titulo_publicacion)!!}</td>
-             <td>{!!Form::label('variacion_nombre', $order->variacion_nombre)!!}</td>
+             <td>{!!Form::text('codigo_profit', $order->codigo_profit)!!}</td>
+             <td>{!!Form::select('cantidad', [$order->cantidad => $order->cantidad], $order->cantidad)!!}</td>
              <td>{!!Form::label('costo', $order->costo)!!}</td>
              <td>{!!Form::label('fecha', $order->fecha)!!}</td>
-             <td>{!!Form::label('estatus', $order->estatus)!!}</td>
-             <td>{!!Form::text('pedido_profit','')!!}</td>
-             <td>{!!Form::submit('Cargar')!!}</td>
+             <td>{!!Form::select('estatus', config('options.status'), $order->estatus)!!}</td>
+             <td>{!!Form::text('pedido_profit',$order->pedido_profit)!!}</td>
+             <td>{!!Form::submit('Actualizar')!!}</td>
             </tr>
 
         {!! Form::close() !!}
@@ -65,11 +71,12 @@ Cargar Pedidos Profit
                  <td>{!!Form::label('seudonimo', $order->seudonimo)!!}</td>
                  <td>{!!Form::label('nombre', $order->nombre)!!}</td>
                  <td>{!!Form::label('titulo_publicacion', $order->titulo_publicacion)!!}</td>
-                 <td>{!!Form::label('variacion_nombre', $order->variacion_nombre)!!}</td>
+                 <td>{!!Form::text('codigo_profit', $order->codigo_profit)!!}</td>
+                 <td>{!!Form::select('cantidad', [$order->cantidad => $order->cantidad], $order->cantidad)!!}</td>
                  <td>{!!Form::label('costo', $order->costo)!!}</td>
                  <td>{!!Form::label('fecha', $order->fecha)!!}</td>
                  <td>{!!Form::select('estatus', ['Nuevo' => 'Nuevo', 'Pendiente' => 'Pendiente', 'Duplicado' => 'Duplicado'], $order->estatus)!!}</td>
-                 <td>{!!Form::label('pedido_profit', $order->pedido_profit)!!}</td>
+                 <td>{!!Form::text('pedido_profit',$order->pedido_profit)!!}</td>
                  <td>{!!Form::submit('Actualizar')!!}</td>
                 </tr>
 
