@@ -22,7 +22,7 @@ Ingresar Estados de Cuenta
         <td>{!! Form::date('fecha', now())!!}</td>
     </tr>
     <tr height="50">
-        <th>{!!Form::reset('Borrar')!!}</th>
+        <td>{!!Form::reset('Borrar')!!}</td>
         <td>{!!Form::submit('Insertar')!!}</td>
     </tr>
 </table>

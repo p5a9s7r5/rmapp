@@ -15,7 +15,7 @@ class AdminItemsController extends Controller
     public function index(Request $request)
     {
 
-        $items = Articulo_Profit::busqueda($request->get('busqueda'))->stock($request->get('stock'))->orderBy('stock_general', 'desc')->paginate();
+        $items = Articulo_Profit::busqueda($request->get('busqueda'))->stock($request->get('stock'))->orderBy('stock_general', 'desc')->paginate(50);
 
         return view('admin.items.index', compact('items'));
     }

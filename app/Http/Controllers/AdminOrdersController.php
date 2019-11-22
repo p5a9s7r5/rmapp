@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Ml_pedido;
 use App\Articulo_Profit;
+use App\Pago;
+use App\Envio;
 
 class AdminOrdersController extends Controller
 {
@@ -16,13 +18,10 @@ class AdminOrdersController extends Controller
     public function index(Request $request)
     {
 
-        $orders = Ml_pedido::busqueda($request->get('busqueda'))->estatus($request->get('estatus'))->orderBy('fecha', 'desc')->paginate();
+        $orders = Ml_pedido::busqueda($request->get('busqueda'))->estatus($request->get('estatus'))->orderBy('fecha', 'desc')->paginate(30);
 
         return view('admin.orders.index', compact('orders'));
 
-        /*$orders=Ml_pedido::paginate(20);
-
-        return view('admin.orders.index', compact('orders'));*/
     }
 
     /**
@@ -56,9 +55,13 @@ class AdminOrdersController extends Controller
      */
     public function show($id)
     {
-        $order=Ml_pedido::findOrFail($id);
+        $order = Ml_pedido::findOrFail($id);
 
-        return view('admin.orders.show', compact('order'));
+        $pago = Ml_pedido::find($id)->pago;
+
+        $envio = Ml_pedido::find($id)->envio;
+
+        return view('admin.orders.show', compact('order', 'pago', 'envio'));
 
     }
 
@@ -146,5 +149,86 @@ class AdminOrdersController extends Controller
             return ('No hay pedidos nuevos');
 
         }
+    }
+
+    public function payments()
+    {
+
+        $orders = Ml_pedido::where('estatus', 'Pago Registrado')->orWhere('estatus', 'Envio Registrado')->orderBy('fecha', 'asc')->get();
+
+        return view('admin.orders.payments', compact('orders'));
+
+    }
+
+    public function paycheck($id)
+    {
+        $order_id = Ml_pedido::findOrFail($id);
+
+        $orders = Ml_pedido::where('seudonimo', $order_id['seudonimo'])->orderBy('fecha', 'desc')->get();
+
+        $pago = Ml_pedido::find($id)->pago;
+
+        $envio = Ml_pedido::find($id)->envio;
+
+        return view('admin.orders.paycheck', compact('orders', 'pago', 'envio'));
+    }
+
+    public function updatepay(Request $request, $id)
+    {
+        
+        $pago = Pago::findOrFail($id);
+        $pago->fecha = $request->fecha;
+        $pago->banco = $request->banco;
+        $pago->interbancario = $request->interbancario;
+        $pago->monto = $request->monto;
+        $pago->referencia = $request->referencia;
+        $pago->save();
+
+        $order = Pago::find($id)->ml_pedido;
+        $order->factura_profit = $request->factura_profit;
+        if($order->estatus == 'Pago Registrado')      {  $order->estatus = 'Pago Verificado';  }
+        elseif($order->estatus == 'Envio Registrado') {  $order->estatus = 'Envio Aprobado';   }
+        $order->save();
+
+        return redirect('/admin/orders/payments');
+    }
+
+    public function shipedit($id)
+    {
+        $envio = Envio::findOrFail($id);
+
+        $order = Envio::find($id)->ml_pedido;
+
+        $pago = Ml_pedido::find($order->pedidos_id)->pago;
+
+        return view('admin.orders.shipedit', compact('envio', 'order', 'pago'));
+        //dd($pago->id);
+    }
+
+    public function updateship(Request $request, $id)
+    {
+        
+        $envio = Envio::findOrFail($id);
+        $envio->nombre = $request->nombre;
+        $envio->cedula = $request->cedula;
+        $envio->telefono = $request->telefono;
+        $envio->direccion = $request->direccion;
+        $envio->ciudad = $request->ciudad;
+        $envio->save();
+
+        $pago = Ml_pedido::find($request->pedidos_id)->pago;
+        $pago->despacho = $request->despacho;
+        $pago->save();
+
+        return redirect('/admin/orders/');
+    }
+
+    public function shipping()
+    {
+
+        $orders = Ml_pedido::where('estatus', 'Envio Aprobado')->orderBy('fecha', 'asc')->get();
+
+        return view('admin.orders.shipping', compact('orders'));
+
     }
 }

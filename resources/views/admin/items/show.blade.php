@@ -13,7 +13,7 @@ Datos Generales
 
 @section("general")
 
-<table width="500" border="1" style="margin: 0 auto;">
+<table id="tabla2">
 
     <tr height="50">
        <th>Id</th>

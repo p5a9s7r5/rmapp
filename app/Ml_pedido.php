@@ -9,7 +9,7 @@ class Ml_pedido extends Model
     protected $primaryKey = 'pedidos_id';
 
     protected $fillable = [
-        'pedido_profit', 'estatus',
+        'pedido_profit', 'estatus', 'email',
     ];
 
     public function scopeBusqueda ($query, $busqueda)
@@ -32,5 +32,17 @@ class Ml_pedido extends Model
 
         }
 
+    }
+
+    public function pago()
+    {
+
+        return $this->hasOne('App\Pago');
+    }
+
+    public function envio()
+    {
+        
+        return $this->hasOne('App\Envio');
     }
 }

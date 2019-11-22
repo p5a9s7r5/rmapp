@@ -140,14 +140,154 @@
             }
 
             form {
-                
-                float:center;
-                padding:2px;
+                padding:10px;
                 cursor:pointer;
                 display:block;
-                width:290px;
                 margin:auto;
                 text-align:left;
+            }
+
+            .textarea0[type=text] {
+                width: 60px;
+                padding: 12px 20px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                outline: none;}
+            .textarea0[type=text]:focus {
+                background-color: lightblue;}
+
+            .textarea1[type=text] {
+                width: 120px;
+                padding: 12px 20px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                outline: none;}
+            .textarea1[type=text]:focus {
+                background-color: lightblue;}
+
+            .textarea2[type=text] {
+                width: 180px;
+                padding: 12px 20px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                outline: none;}
+            .textarea2[type=text]:focus {
+                background-color: lightblue;}
+
+            .textarea3[type=text] {
+                width: 400px;
+                padding: 12px 20px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                outline: none;}
+            .textarea2[type=text]:focus {
+                background-color: lightblue;}
+
+            .informacion {
+                font-size: 20px;
+                height: 30vh;
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 30px;
+            }
+
+            .imgcabecera {
+                float:center;
+                width:400px;
+            }
+
+            #tabla1 {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 80%;
+                margin: auto;}
+                #tabla1 td, #tabla1 th {
+                    border: 1px solid #ddd;
+                    padding: 8px;}
+                #tabla1 tr:nth-child(even){background-color: #f2f2f2;}
+                #tabla1 tr:hover {background-color: #ddd;}
+                #tabla1 th {
+                    padding-top: 12px;
+                    padding-bottom: 12px;
+                    text-align: center;
+                    background-color: #4CAF50;
+                    color: white;}
+
+            #tabla2 {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 650px;
+                margin: auto;}
+                #tabla2 td, #tabla2 th {
+                    border: 1px solid #ddd;
+                    padding: 8px;}
+                #tabla2 tr:nth-child(even){background-color: #f2f2f2;}
+                #tabla2 tr:hover {background-color: #ddd;}
+                #tabla2 th {
+                    padding-top: 12px;
+                    padding-bottom: 12px;
+                    text-align: center;
+                    background-color: #4CAF50;
+                    color: white;}
+
+            #tabla3 {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 40%;
+                margin: auto;}
+                #tabla3 td, #tabla3 th {
+                    border: 1px solid #ddd;
+                    padding: 8px;}
+                #tabla3 tr:nth-child(even){background-color: #f2f2f2;}
+                #tabla3 tr:hover {background-color: #ddd;}
+                #tabla3 th {
+                    padding-top: 12px;
+                    padding-bottom: 12px;
+                    text-align: center;
+                    background-color: #4CAF50;
+                    color: white;}
+
+            input[type=button], input[type=submit], input[type=reset] {
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 10px 32px;
+                text-decoration: none;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+
+            .inputbutton {
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 10px 32px;
+                text-decoration: none;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+
+            input[type=email] {
+                border: none;
+                width: 385px;
+                padding: 10px 10px;
+                text-decoration: none;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+
+            .buscador{
+                width: 95%;
+                box-sizing: border-box;
+                border: 2px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+                background-color: white;
+                background-image: url('searchicon.png');
+                background-position: 10px 10px; 
+                background-repeat: no-repeat;
+                padding: 8px 16px 8px 40px;
             }
 
         </style>
@@ -169,6 +309,8 @@
         <div class="pie">
 
         @yield("pie")
+
+        <br/><br/><br/><br/><br/><br/>
 
         </div>
 
