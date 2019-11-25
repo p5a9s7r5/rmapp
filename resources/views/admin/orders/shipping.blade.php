@@ -23,9 +23,9 @@ Pedidos por Procesar
        <th>Nombre</th>
        <th>Articulo</th>
        <th>Monto</th>
-       <th>Estatus</th>
-       <th>Pedido Profit</th>
-       <th>Ver Informacion</th>
+       <th>Cantidad</th>
+       <th>Factura Profit</th>
+       <th>Imprimir Guia</th>
     </tr>
     </thead>
  
@@ -38,9 +38,9 @@ Pedidos por Procesar
              <td>{{$order->nombre}}</td>
              <td>{{$order->titulo_publicacion}}</td>
              <td>{{$order->costo}}</td>
-             <td>{{$order->estatus}}</td>
-             <td>{{$order->pedido_profit}}</td>
-             <td>{{link_to_route('orders.paycheck', 'Ver Datos', $order->pedidos_id)}}</td>
+             <td>{{$order->cantidad}}</td>
+             <td>{{$order->factura_profit}}</td>
+             <td>{{link_to_route('orders.pdfguide', 'Confirmar', $order->pedidos_id)}}</td>
             </tr>
         @endforeach
     @endif

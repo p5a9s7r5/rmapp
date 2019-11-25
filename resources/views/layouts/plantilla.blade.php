@@ -248,6 +248,25 @@
                     background-color: #4CAF50;
                     color: white;}
 
+            #tabla4 {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                font-size: 20px;
+                border-collapse: collapse;
+                width: 70%;
+                margin: auto;}
+                #tabla4 td, #tabla4 th {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                    text-align: left;}
+                #tabla4 tr:nth-child(even){background-color: #f2f2f2;}
+                #tabla4 tr:hover {background-color: #ddd;}
+                #tabla4 th {
+                    padding-top: 12px;
+                    padding-bottom: 12px;
+                    text-align: right;
+                    background-color: #4CAF50;
+                    color: white;}
+
             input[type=button], input[type=submit], input[type=reset] {
                 background-color: #4CAF50;
                 border: none;

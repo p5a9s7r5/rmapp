@@ -29,6 +29,8 @@ Route::get('/admin/users/{id}/delete', 'AdminUsersController@delete')->middlewar
 Route::get('/admin/orders/aprofit', 'AdminOrdersController@aprofit')->middleware('auth');
 Route::get('/admin/orders/payments', 'AdminOrdersController@payments')->middleware('auth')->name('orders.payments');
 Route::get('/admin/orders/shipping', 'AdminOrdersController@shipping')->middleware('auth')->name('orders.shipping');
+Route::get('/admin/orders/guides', 'AdminOrdersController@guides')->middleware('auth')->name('orders.guides');
+Route::get('/admin/orders/pdfguide/{id}', 'AdminOrdersController@pdfguide')->middleware('auth')->name('orders.pdfguide');
 Route::get('/admin/orders/paycheck/{id}', 'AdminOrdersController@paycheck')->middleware('auth')->name('orders.paycheck');
 Route::put('/admin/orders/paycheck/{id}', 'AdminOrdersController@updatepay')->middleware('auth');
 Route::get('/admin/orders/shipedit/{id}', 'AdminOrdersController@shipedit')->middleware('auth')->name('orders.shipedit');
