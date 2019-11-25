@@ -81,30 +81,30 @@
 <table id="tabla">
     <tr height="50">
        <th width="17%">Nombre:</th>
-       <td>{{$envio->nombre}}</td>
+       <td>{{$order->destinatario}}</td>
     </tr>
     <tr height="50">
        <th>Cedula:</th>
-       <td>{{$envio->cedula}}</td>
+       <td>{{$order->cedula}}</td>
     </tr>
     <tr height="50">
        <th>Telefono:</th>
-       <td>{{$envio->telefono}}</td>
+       <td>{{$order->telefono}}</td>
     </tr>
     <tr height="50">
        <th>Ciudad:</th>
-       <td>{{$envio->ciudad}}</td>
+       <td>{{$order->ciudad_envio}}</td>
     </tr>
     <tr height="200">
        <th>Direccion:</th>
-       <td>{{$envio->direccion}}</td>
+       <td>{{$order->direccion_envio}}</td>
     </tr>
 </table><br/><br/>
 
 <table id="tabla">
     <tr height="50">
        <th width="17%">Empresa:</th>
-       <td>{{$pago->despacho}}</td>
+       <td>{{$order->despacho}}</td>
        <th width="17%">Fecha:</th>
        <td><?=date('d/m/Y g:ia');?></td>
     </tr>
@@ -112,7 +112,7 @@
        <th >Factura:</th>
        <td>{{$order->factura_profit}}</td>
        <th>Monto:</th>
-       <td>{{$pago->monto}}</td>
+       <td>{{$order->monto_pago}}</td>
     </tr>
 </table>
 

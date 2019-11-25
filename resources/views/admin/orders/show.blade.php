@@ -80,7 +80,7 @@ Datos Generales
        <td>{{$order->estatus}}</td>
     </tr>
 
-@if($pago)
+@if($order->fecha_pago)
 
     <tr height="50">
        <th></th>
@@ -88,7 +88,7 @@ Datos Generales
     </tr>
     <tr height="50">
        <th>Despacho</th>
-       <td>{{$pago->despacho}}</td>
+       <td>{{$order->despacho}}</td>
     </tr>
     <tr height="50">
        <th>Email</th>
@@ -96,15 +96,15 @@ Datos Generales
     </tr>
     <tr height="50">
        <th>Articulo segun Cliente</th>
-       <td>{{$pago->articulo}}</td>
+       <td>{{$order->articulo_cliente}}</td>
     </tr>
     <tr height="50">
        <th>Articulos Adicionales</th>
-       <td>{{$pago->otrosart}}</td>
+       <td>{{$order->otros_articulos}}</td>
     </tr>
     <tr height="50">
        <th>Cantidad segun Cliente</th>
-       <td>{{$pago->cantidad}}</td>
+       <td>{{$order->cantidad_cliente}}</td>
     </tr>
     <tr height="50">
        <th></th>
@@ -112,37 +112,36 @@ Datos Generales
     </tr>
     <tr height="50">
        <th>Fecha</th>
-       <td>{{$pago->fecha}}</td>
+       <td>{{$order->fecha_pago}}</td>
     </tr>
     <tr height="50">
        <th>Banco</th>
-       <td>{{$pago->banco}}</td>
+       <td>{{$order->banco}}</td>
     </tr>
     <tr height="50">
        <th>Banco Origen</th>
-       <td>{{$pago->interbancario}}</td>
+       <td>{{$order->interbancario}}</td>
     </tr>
     <tr height="50">
        <th>Monto</th>
-       <td>{{$pago->monto}}</td>
+       <td>{{$order->monto_pago}}</td>
     </tr>
     <tr height="50">
        <th>Referencia</th>
-       <td>{{$pago->referencia}}</td>
+       <td>{{$order->referencia_pago}}</td>
     </tr>
     <tr height="50">
        <th>Transferencias Adicionales</th>
-       <td>{{$pago->otrastr}}</td>
+       <td>{{$order->otros_pagos}}</td>
     </tr>
     <tr height="50">
        <th>Factura Profit</th>
        <td>{{$order->factura_profit}}</td>
     </tr>
-    
-    
+
 @endif
 
-@if($envio)
+@if($order->destinatario)
 
     <tr height="50">
        <th></th>
@@ -150,23 +149,27 @@ Datos Generales
     </tr>
     <tr height="50">
        <th>Nombre Destinatario</th>
-       <td>{{$envio->nombre}}</td>
+       <td>{{$order->destinatario}}</td>
     </tr>
     <tr height="50">
        <th>Nro Cedula</th>
-       <td>{{$envio->cedula}}</td>
+       <td>{{$order->cedula}}</td>
     </tr>
     <tr height="50">
        <th>Telefono</th>
-       <td>{{$envio->telefono}}</td>
+       <td>{{$order->telefono}}</td>
     </tr>
     <tr height="50">
        <th>Direccion</th>
-       <td>{{$envio->direccion}}</td>
+       <td>{{$order->direccion_envio}}</td>
     </tr>
     <tr height="50">
        <th>Ciudad / Estado</th>
-       <td>{{$envio->ciudad}}</td>
+       <td>{{$order->ciudad_envio}}</td>
+    </tr>
+    <tr height="50">
+       <th>Guia Envio</th>
+       <td>{{$order->guia_envio}}</td>
     </tr>
     
 @endif
@@ -176,8 +179,8 @@ Datos Generales
 <div>
 <table style="margin: 0 auto;">
    <tr>
-      @if($envio)
-      <td><input type ='button' class="btn btn-warning"  value = 'Editar Envio' onclick="location.href = '{{ route('orders.shipedit', $envio->id) }}'"/></th>
+      @if($order->destinatario)
+      <td><input type ='button' class="btn btn-warning"  value = 'Editar Envio' onclick="location.href = '{{ route('orders.shipedit', $order->pedidos_id) }}'"/></th>
       @endif
       <td><input type ='button' class="btn btn-warning"  value = 'Editar Pedido' onclick="location.href = '{{ route('orders.edit', $order->pedidos_id) }}'"/></th>
    </tr>

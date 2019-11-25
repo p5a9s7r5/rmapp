@@ -13,31 +13,30 @@ Formulario de Envio
 {!! Form::open(['method' => 'post', 'action' => 'FormsController@confirmship']) !!}
 
 <table id="tabla2">
-
     <tr height="50">
        <th>{!!Form::label('despacho', 'Empresa Envio')!!}</th>
        <td>{!!Form::text('despacho', session()->get('despacho'), ['disabled' => 'disabled', 'class' => 'textarea2'])!!}</td>
            {!!Form::hidden('despacho', session()->get('despacho'))!!}
     </tr>
     <tr height="50">
-       <th>{!!Form::label('nombre', 'Nombre Destinatario')!!}</th>
-       <td>{!!Form::text('nombre', session()->get('nombre'), ['required'=>'required','class' => 'textarea2'])!!}</td>
+       <th>{!!Form::label('destinatario', 'Nombre Destinatario')!!}</th>
+       <td>{!!Form::text('destinatario', session()->get('destinatario'), ['required'=>'required', 'maxlength'=> 40, 'class' => 'textarea2'])!!}</td>
     </tr>
     <tr height="50">
        <th>{!!Form::label('cedula', 'Nro Cedula')!!}</th>
-       <td>{!!Form::text('cedula', session()->get('cedula'), ['required'=>'required', 'class' => 'textarea2'])!!}</td>
+       <td>{!!Form::text('cedula', session()->get('cedula'), ['required'=>'required', 'maxlength'=> 15, 'class' => 'textarea2'])!!}</td>
     </tr>
     <tr height="50">
        <th>{!!Form::label('telefono', 'Telefono')!!}</th>
-       <td>{!!Form::text('telefono', session()->get('telefono'), ['required'=>'required', 'class' => 'textarea2'])!!}</td>
+       <td>{!!Form::text('telefono', session()->get('telefono'), ['required'=>'required', 'maxlength'=> 25, 'class' => 'textarea2'])!!}</td>
     </tr>
     <tr height="50">
-       <th>{!!Form::label('direccion', 'Direccion')!!}</th>
-       <td>{!!Form::textarea('direccion', session()->get('direccion'), ['required'=>'required', 'rows' => 5, 'cols' => 55])!!}</td>
+       <th>{!!Form::label('direccion_envio', 'Direccion')!!}</th>
+       <td>{!!Form::textarea('direccion_envio', session()->get('direccion_envio'), ['required'=>'required', 'maxlength'=> 300, 'rows' => 5, 'cols' => 55])!!}</td>
     </tr>
     <tr height="50">
-       <th>{!!Form::label('ciudad', 'Ciudad / Estado')!!}</th>
-       <td>{!!Form::text('ciudad', session()->get('ciudad'), ['required'=>'required', 'class' => 'textarea2'])!!}</td>
+       <th>{!!Form::label('ciudad_envio', 'Ciudad / Estado')!!}</th>
+       <td>{!!Form::text('ciudad_envio', session()->get('ciudad_envio'), ['required'=>'required', 'maxlength'=> 30, 'class' => 'textarea2'])!!}</td>
     </tr>
 </table>
 <br/>

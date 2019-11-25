@@ -19,23 +19,31 @@ Guias por Cargar
     <thead>
     <tr height="50">
        <th>Nombre</th>
-       <th>Cedula</th>
-       <th>Telefono</th>
-       <th>Direccion</th>
-       <th>Ciudad</th>
+       <th>Destinatario</th>
+       <th>Ciudad / Estado</th>
+       <th>Empresa Envio</th>
+       <th>Guia</th>
+       <th>Actualizar</th>
     </tr>
     </thead>
  
     <tbody>
-    @if($envios)
-        @foreach($envios as $envio)
+    @if($orders)
+        @foreach($orders as $order)
+
+        {!! Form::model($order, ['method' => 'PUT', 'action' => ['AdminOrdersController@updateguide', $order->pedidos_id]]) !!}
+
             <tr height="50">
-             <td>{{$envio->nombre}}</td>
-             <td>{{$envio->cedula}}</td>
-             <td>{{$envio->telefono}}</td>
-             <td>{{$envio->direccion}}</td>
-             <td>{{$envio->ciudad}}</td>
+             <td>{!!Form::label('nombre', $order->nombre)!!}</td>
+             <td>{!!Form::label('destinatario', $order->destinatario)!!}</td>
+             <td>{!!Form::label('ciudad_envio', $order->ciudad_envio)!!}</td>
+             <td>{!!Form::select('despacho', config('options.despachos'), $order->despacho)!!}</td>
+             <td>{!!Form::text('guia_envio', $order->guia_envio, ['required'=>'required', 'class' => 'textarea2'])!!}</td>
+             <td>{!!Form::submit('Cargar')!!}</td>
             </tr>
+
+        {!! Form::close() !!}
+
         @endforeach
     @endif
     </tbody>

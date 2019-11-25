@@ -24,33 +24,33 @@ Editar Envio
         </table><br/><br/>
         <h2>Datos de Envio</h2>
 
-    {!! Form::model($envio, ['method' => 'PUT', 'action' => ['AdminOrdersController@updateship', $envio->id]]) !!}
+    {!! Form::model($order, ['method' => 'PUT', 'action' => ['AdminOrdersController@updateship', $order->pedidos_id]]) !!}
   
     <table id="tabla2" >
     <tr>
        <th>{!!Form::label('despacho', 'Empresa Envio', ['class' => 'textarea2'])!!}</th>
-       <td>{!!Form::select('despacho', config('options.despachos'), $pago->despacho, ['required'=>'required', 'class' => 'textarea2'])!!}</td>
+       <td>{!!Form::select('despacho', config('options.despachos'), $order->despacho, ['required'=>'required', 'class' => 'textarea2'])!!}</td>
            {!!Form::hidden('pedidos_id', $order->pedidos_id)!!}
     </tr>
     <tr>
-       <th>{!!Form::label('nombre', 'Nombre Destinatario')!!}</th>
-       <td>{!!Form::text('nombre', $envio->nombre, ['required'=>'required','class' => 'textarea2'])!!}</td>
+       <th>{!!Form::label('destinatario', 'Nombre Destinatario')!!}</th>
+       <td>{!!Form::text('destinatario', $order->destinatario, ['required'=>'required','class' => 'textarea2'])!!}</td>
     </tr>
     <tr>
        <th>{!!Form::label('cedula', 'Nro Cedula')!!}</th>
-       <td>{!!Form::text('cedula', $envio->cedula, ['required'=>'required', 'class' => 'textarea2'])!!}</td>
+       <td>{!!Form::text('cedula', $order->cedula, ['required'=>'required', 'class' => 'textarea2'])!!}</td>
     </tr>
     <tr>
        <th>{!!Form::label('telefono', 'Telefono')!!}</th>
-       <td>{!!Form::text('telefono', $envio->telefono, ['required'=>'required', 'class' => 'textarea2'])!!}</td>
+       <td>{!!Form::text('telefono', $order->telefono, ['required'=>'required', 'class' => 'textarea2'])!!}</td>
     </tr>
     <tr>
-       <th>{!!Form::label('direccion', 'Direccion')!!}</th>
-       <td>{!!Form::textarea('direccion', $envio->direccion, ['required'=>'required', 'rows' => 5, 'cols' => 55])!!}</td>
+       <th>{!!Form::label('direccion_envio', 'Direccion')!!}</th>
+       <td>{!!Form::textarea('direccion_envio', $order->direccion_envio, ['required'=>'required', 'rows' => 5, 'cols' => 55])!!}</td>
     </tr>
     <tr>
-       <th>{!!Form::label('ciudad', 'Ciudad / Estado')!!}</th>
-       <td>{!!Form::text('ciudad', $envio->ciudad, ['required'=>'required', 'class' => 'textarea2'])!!}</td>
+       <th>{!!Form::label('ciudad_envio', 'Ciudad / Estado')!!}</th>
+       <td>{!!Form::text('ciudad_envio', $order->ciudad_envio, ['required'=>'required', 'class' => 'textarea2'])!!}</td>
     </tr>
     </table><br/>
     

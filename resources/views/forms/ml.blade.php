@@ -18,31 +18,31 @@ Formulario de Pagos
        <th>{!!Form::label('seudonimo', 'Seudonimo')!!}</th>
        <td>{!!Form::text('seudonimo', $order->seudonimo, ['disabled' => 'disabled', 'class' => 'textarea2'])!!}</td>
            {!!Form::hidden('seudonimo', $order->seudonimo)!!}
-           {!!Form::hidden('ml_pedido_pedidos_id', $order->pedidos_id)!!}
-           {!!Form::hidden('ciudad', $order->ubicacion)!!}
+           {!!Form::hidden('pedidos_id', $order->pedidos_id)!!}
+           {!!Form::hidden('ciudad_envio', $order->ubicacion)!!}
            {!!Form::hidden('telefono', $order->telefono)!!}
-           {!!Form::hidden('nombre', $order->nombre)!!}
+           {!!Form::hidden('destinatario', $order->nombre)!!}
     </tr>
     <tr height="50">
        <th>{!!Form::label('articulo', 'Articulo Comprado')!!}</th>
-       <td>{!!Form::text('articulo', $order->titulo_publicacion, ['required'=>'required','class' => 'textarea3'])!!}</td>
+       <td>{!!Form::text('articulo_cliente', $order->titulo_publicacion, ['required'=>'required', 'maxlength'=> 80, 'class' => 'textarea3'])!!}</td>
     </tr>
     <tr height="50">
        <th>{!!Form::label('otrosa', 'Compras Articulos Adicionales? ')!!}</th>
-       <td><input type="radio" name="hab1" onclick="otrosart.disabled=false" />Si 
-           <input type="radio" name="hab1" onclick="otrosart.disabled=true" checked="checked"/>No</td>
+       <td><input type="radio" name="hab1" onclick="otros_articulos.disabled=false" />Si 
+           <input type="radio" name="hab1" onclick="otros_articulos.disabled=true" checked="checked"/>No</td>
     </tr>
     <tr height="50">
-       <th>{!!Form::label('otrosart', 'Articulos Adicionales')!!}</th>
-       <td>{!!Form::textarea('otrosart', session()->get('otrosart'), ['disabled' => 'disabled', 'rows' => 4, 'cols' => 55])!!}</td>
+       <th>{!!Form::label('otros_articulos', 'Articulos Adicionales')!!}</th>
+       <td>{!!Form::textarea('otros_articulos', session()->get('otros_articulos'), ['disabled' => 'disabled', 'maxlength'=> 300, 'rows' => 4, 'cols' => 55])!!}</td>
     </tr>
     <tr height="50">
-       <th>{!!Form::label('cantidad', 'Total articulos')!!}</th>
-       <td>{!!Form::number('cantidad', $order->cantidad, ['required'=>'required', 'class' => 'textarea1'])!!}</td>
+       <th>{!!Form::label('cantidad_cliente', 'Total articulos')!!}</th>
+       <td>{!!Form::number('cantidad_cliente', $order->cantidad, ['required'=>'required', 'class' => 'textarea1'])!!}</td>
     </tr>
     <tr height="50">
        <th>{!!Form::label('fecha_pago', 'Fecha Transferencia')!!}</th>
-       <td>{!!Form::date('fecha', session()->get('fecha'), ['required'=>'required', 'class' => 'textarea2'])!!}</td>
+       <td>{!!Form::date('fecha_pago', session()->get('fecha_pago'), ['required'=>'required', 'class' => 'textarea2'])!!}</td>
     </tr>
     <tr height="50">
        <th>{!!Form::label('banco', 'Banco')!!}</th>
@@ -55,15 +55,15 @@ Formulario de Pagos
     </tr>
     <tr height="50">
        <th>{!!Form::label('interbancario', 'Banco Origen')!!}</th>
-       <td>{!!Form::text('interbancario', session()->get('interbancario'), ['disabled' => 'disabled', 'class' => 'textarea2'])!!}</td>
+       <td>{!!Form::text('interbancario', session()->get('interbancario'), ['disabled' => 'disabled', 'maxlength'=> 20, 'class' => 'textarea2'])!!}</td>
     </tr>
     <tr height="50">
-       <th>{!!Form::label('monto', 'Monto')!!}</th>
-       <td>{!!Form::text('monto', $order->costo, ['required'=>'required', 'class' => 'textarea2'])!!}</td>
+       <th>{!!Form::label('monto_pago', 'Monto')!!}</th>
+       <td>{!!Form::text('monto_pago', $order->costo, ['required'=>'required', 'maxlength'=> 20, 'class' => 'textarea2'])!!}</td>
     </tr>
     <tr height="50">
-       <th>{!!Form::label('referencia', 'Numero Referencia')!!}</th>
-       <td>{!!Form::text('referencia', session()->get('referencia'), ['required'=>'required', 'class' => 'textarea2'])!!}</td>
+       <th>{!!Form::label('referencia_pago', 'Numero Referencia')!!}</th>
+       <td>{!!Form::text('referencia_pago', session()->get('referencia_pago'), ['required'=>'required', 'maxlength'=> 30, 'class' => 'textarea2'])!!}</td>
     </tr>
     <tr height="50">
        <th>{!!Form::label('otrast', 'Realizaste mas de una transferencia? ')!!}</th>
@@ -71,8 +71,8 @@ Formulario de Pagos
            <input type="radio" name="hab3" onclick="otrastr.disabled=true" checked="checked"/>No</td>
     </tr>
     <tr height="50">
-       <th>{!!Form::label('otrastr', 'Datos Transferencias Adicionales')!!}</th>
-       <td>{!!Form::textarea('otrastr', session()->get('otrastr'), ['disabled' => 'disabled', 'rows' => 3, 'cols' => 55])!!}</td>
+       <th>{!!Form::label('otros_pagos', 'Datos Transferencias Adicionales')!!}</th>
+       <td>{!!Form::textarea('otros_pagos', session()->get('otros_pagos'), ['disabled' => 'disabled', 'maxlength'=> 300, 'rows' => 3, 'cols' => 55])!!}</td>
     </tr>
     <tr height="50">
        <th>{!!Form::label('email', 'Email')!!}</th>

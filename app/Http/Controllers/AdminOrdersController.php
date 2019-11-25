@@ -7,8 +7,6 @@ use Barryvdh\DomPDF\Facade as PDF;
 use App\Articulo_Profit;
 use App\Ml_pedido;
 use App\Mensaje;
-use App\Envio;
-use App\Pago;
 
 class AdminOrdersController extends Controller
 {
@@ -59,11 +57,7 @@ class AdminOrdersController extends Controller
     {
         $order = Ml_pedido::findOrFail($id);
 
-        $pago = Ml_pedido::find($id)->pago;
-
-        $envio = Ml_pedido::find($id)->envio;
-
-        return view('admin.orders.show', compact('order', 'pago', 'envio'));
+        return view('admin.orders.show', compact('order'));
 
     }
 
@@ -112,10 +106,19 @@ class AdminOrdersController extends Controller
             $estatus = $request->estatus;
         }
 
+        if($request->pedido_profit = 0 or $request->pedido_profit == ''){
+
+            $pedido_profit = 100;
+
+        }else{
+
+            $pedido_profit = $request->pedido_profit;
+        }
+
         // Actualizamos el status del pedido
 
         $order = Ml_pedido::findOrFail($id);
-        $order->pedido_profit = $request->pedido_profit;
+        $order->pedido_profit = $pedido_profit;
         $order->estatus = $estatus;
         $order->save();
 
@@ -164,29 +167,22 @@ class AdminOrdersController extends Controller
 
     public function paycheck($id)
     {
-        $order_id = Ml_pedido::findOrFail($id);
+        $order = Ml_pedido::findOrFail($id);
 
-        $orders = Ml_pedido::where('seudonimo', $order_id['seudonimo'])->orderBy('fecha', 'desc')->get();
+        $orders = Ml_pedido::where('seudonimo', $order['seudonimo'])->orderBy('fecha', 'desc')->get();
 
-        $pago = Ml_pedido::find($id)->pago;
-
-        $envio = Ml_pedido::find($id)->envio;
-
-        return view('admin.orders.paycheck', compact('orders', 'pago', 'envio'));
+        return view('admin.orders.paycheck', compact('order', 'orders'));
     }
 
     public function updatepay(Request $request, $id)
     {
         
-        $pago = Pago::findOrFail($id);
-        $pago->fecha = $request->fecha;
-        $pago->banco = $request->banco;
-        $pago->interbancario = $request->interbancario;
-        $pago->monto = $request->monto;
-        $pago->referencia = $request->referencia;
-        $pago->save();
-
-        $order = Pago::find($id)->ml_pedido;
+        $order = Ml_pedido::findOrFail($id);
+        $order->fecha_pago = $request->fecha_pago;
+        $order->banco = $request->banco;
+        $order->interbancario = $request->interbancario;
+        $order->monto_pago = $request->monto_pago;
+        $order->referencia_pago = $request->referencia_pago;
         $order->factura_profit = $request->factura_profit;
         if($order->estatus == 'Pago Registrado'){  
             $order->estatus = 'Pago Verificado'; 
@@ -196,7 +192,6 @@ class AdminOrdersController extends Controller
 
         $mensaje_id = Mensaje::where('order_id', $order->codigo_venta)->first();
         $mensaje = Mensaje::findOrFail($mensaje_id->id);
-        $mensaje->factura = $request->factura_profit;
         if($order->estatus == 'Pago Verificado'){
             if($mensaje->retiro != 1){
                 $mensaje->retiro = 2;  
@@ -212,29 +207,22 @@ class AdminOrdersController extends Controller
 
     public function shipedit($id)
     {
-        $envio = Envio::findOrFail($id);
+        $order = Ml_pedido::findOrFail($id);
 
-        $order = Envio::find($id)->ml_pedido;
-
-        $pago = Ml_pedido::find($order->pedidos_id)->pago;
-
-        return view('admin.orders.shipedit', compact('envio', 'order', 'pago'));
+        return view('admin.orders.shipedit', compact('order'));
     }
 
     public function updateship(Request $request, $id)
     {
-        
-        $envio = Envio::findOrFail($id);
-        $envio->nombre = $request->nombre;
-        $envio->cedula = $request->cedula;
-        $envio->telefono = $request->telefono;
-        $envio->direccion = $request->direccion;
-        $envio->ciudad = $request->ciudad;
-        $envio->save();
 
-        $pago = Ml_pedido::find($request->pedidos_id)->pago;
-        $pago->despacho = $request->despacho;
-        $pago->save();
+        $order = Ml_pedido::findOrFail($id);
+        $order->despacho = $request->despacho;
+        $order->destinatario = $request->destinatario;
+        $order->cedula = $request->cedula;
+        $order->telefono = $request->telefono;
+        $order->direccion_envio = $request->direccion_envio;
+        $order->ciudad_envio = $request->ciudad_envio;
+        $order->save();
 
         return redirect('/admin/orders/');
     }
@@ -252,18 +240,15 @@ class AdminOrdersController extends Controller
     {
 
         $order = Ml_pedido::findOrFail($id);
-        $pago = Ml_pedido::find($id)->pago;
-        $envio = Ml_pedido::find($id)->envio;
 
-        $pdf = PDF::loadView('admin.orders.pdfguide', compact('order', 'pago','envio'));
+        $pdf = PDF::loadView('admin.orders.pdfguide', compact('order'));
 
         $order->estatus = 'Envio Procesado';
         $order->save();
 
         $mensaje_id = Mensaje::where('order_id', $order->codigo_venta)->first();
         $mensaje = Mensaje::findOrFail($mensaje_id->id);
-        $mensaje->despacho = $pago->despacho;
-        if($pago->despacho == 'Motorizado'){
+        if($order->despacho == 'Motorizado'){
             if($mensaje->motorizado != 1){
                 $mensaje->motorizado = 2;  
             }
@@ -281,16 +266,24 @@ class AdminOrdersController extends Controller
 
         $orders = Ml_pedido::where('estatus', 'Envio Procesado')->orderBy('fecha', 'asc')->get();
 
-        foreach($orders as $order){
+        return view('admin.orders.guides', compact('orders'));
 
-            $envios = Ml_pedido::find($order->pedidos_id)->envio;
-        
-        }
-        //$envios = Ml_pedido::find($orders->pedidos_id)->envio;
+    }
 
-        //dd($envios);
+    public function updateguide(Request $request, $id)
+    {
 
-        return view('admin.orders.guides', compact('envios'));
+        $order = Ml_pedido::findOrFail($id);
+        $order->guia_envio = $request->guia_envio;
+        $order->despacho = $request->despacho;
+        $order->estatus = 'Enviado';
+        $order->save();
 
+        $mensaje_id = Mensaje::where('order_id', $order->codigo_venta)->first();
+        $mensaje = Mensaje::findOrFail($mensaje_id->id);
+        $mensaje->despachado = 2;
+        $mensaje->save();
+
+        return redirect('/admin/orders/guides');
     }
 }

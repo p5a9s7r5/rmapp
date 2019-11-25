@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ml_pedido;
-use App\Pago;
-use App\Envio;
 
 class FormsController extends Controller
 {
@@ -52,12 +50,23 @@ class FormsController extends Controller
     public function pay(Request $request)
     {
 
-        Pago::create($request->all());
+        $order = Ml_pedido::findOrFail($request->pedidos_id);
+        $order->articulo_cliente = $request->articulo_cliente;
+        $order->otros_articulos = $request->otros_articulos;
+        $order->cantidad_cliente = $request->cantidad_cliente;
+        $order->fecha_pago = $request->fecha_pago;
+        $order->banco = $request->banco;
+        $order->interbancario = $request->interbancario;
+        $order->monto_pago = $request->monto_pago;
+        $order->referencia_pago = $request->referencia_pago;
+        $order->otros_pagos = $request->otros_pagos;
+        $order->email = $request->email;
+        $order->despacho = $request->despacho;
+        $order->estatus = 'Pago Registrado';
+        $order->save();
 
         $request->session()->flush();
-
-        Ml_pedido::where('pedidos_id', $request->ml_pedido_pedidos_id)->update(['estatus' => 'Pago Registrado', 'email' => $request->email]);
-
+        
         return view('forms.confirm1');
 
     }
@@ -65,24 +74,28 @@ class FormsController extends Controller
     public function ship(Request $request)
     {
 
-        Pago::create($request->all());
-
-        Envio::create($request->all());
-
-        Ml_pedido::where('pedidos_id', $request->ml_pedido_pedidos_id)->update(['estatus' => 'Envio Registrado', 'email' => $request->email]);
+        $order = Ml_pedido::findOrFail($request->pedidos_id);
+        $order->articulo_cliente = $request->articulo_cliente;
+        $order->otros_articulos = $request->otros_articulos;
+        $order->cantidad_cliente = $request->cantidad_cliente;
+        $order->fecha_pago = $request->fecha_pago;
+        $order->banco = $request->banco;
+        $order->interbancario = $request->interbancario;
+        $order->monto_pago = $request->monto_pago;
+        $order->referencia_pago = $request->referencia_pago;
+        $order->otros_pagos = $request->otros_pagos;
+        $order->email = $request->email;
+        $order->despacho = $request->despacho;
+        $order->destinatario = $request->destinatario;
+        $order->cedula = $request->cedula;
+        $order->direccion_envio = $request->direccion_envio;
+        $order->ciudad_envio = $request->ciudad_envio;
+        $order->estatus = 'Envio Registrado';
+        $order->save();
 
         $request->session()->flush();
 
         return view('forms.confirm2');
 
     }
-
-    public function prueba()
-    {
-
-        return view('forms.confirm2');
-
-    }
-
-
 }

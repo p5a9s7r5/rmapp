@@ -13,15 +13,7 @@ Verificar Pago
 
 @section("general")
 
-@php
-    $i=1;
-@endphp
-
-@foreach($orders as $order)
-
-    @if($i==1)
-
-        <table id="tabla1">
+    <table id="tabla1">
         <tr height="50">
             <h2>Cliente</h2>
             <th>Seudonimo:</th>
@@ -31,9 +23,9 @@ Verificar Pago
             <th>Codigo Oferta:</th>
             <td>{{$order->codigo_venta}}</td>
         </tr>
-        </table><br/><br/>
+    </table><br/><br/>
 
-        <table id="tabla1">
+    <table id="tabla1">
         <tr height="50">
             <h2>Datos de Pago</h2>
             <th>Fecha</th>
@@ -45,22 +37,22 @@ Verificar Pago
             <th>Confirmar</th>
         </tr>
 
-        {!! Form::model($pago, ['method' => 'PUT', 'action' => ['AdminOrdersController@updatepay', $pago->id]]) !!}
+        {!! Form::model($order, ['method' => 'PUT', 'action' => ['AdminOrdersController@updatepay', $order->pedidos_id]]) !!}
 
         <tr height="50">
-            <td>{!!Form::date('fecha', $pago->fecha, ['class' => 'textarea2'])!!}</td>
-            <td>{!!Form::select('banco', config('options.bancos'), $pago->banco, ['class' => 'textarea2'])!!}</td>
-            <td>{!!Form::text('interbancario', $pago->interbancario, ['class' => 'textarea2'])!!}</td>
-            <td>{!!Form::text('monto', $pago->monto, ['class' => 'textarea1'])!!}</td>
-            <td>{!!Form::text('referencia', $pago->referencia, ['class' => 'textarea2'])!!}</td>
+            <td>{!!Form::date('fecha_pago', $order->fecha_pago, ['class' => 'textarea2'])!!}</td>
+            <td>{!!Form::select('banco', config('options.bancos'), $order->banco, ['class' => 'textarea2'])!!}</td>
+            <td>{!!Form::text('interbancario', $order->interbancario, ['class' => 'textarea2'])!!}</td>
+            <td>{!!Form::text('monto_pago', $order->monto_pago, ['class' => 'textarea1'])!!}</td>
+            <td>{!!Form::text('referencia_pago', $order->referencia_pago, ['class' => 'textarea2'])!!}</td>
             <td>{!!Form::text('factura_profit', $order->factura_profit, ['class' => 'textarea2'])!!}</td>
             <td>{!!Form::submit('Aprobar')!!}</td>
         </tr>
-        </table><br/><br/>
+    </table><br/><br/>
 
         {!! Form::close() !!}
 
-        <table id="tabla1">
+    <table id="tabla1">
         <tr height="50">
             <h2>Datos Agregados</h2>
             <th class='textarea2'>Despacho</th>
@@ -71,20 +63,20 @@ Verificar Pago
         </tr>
 
         <tr height="50">
-            <td>{!!Form::label('despacho', $pago->despacho, ['class' => 'textarea3'])!!}</td>
-            <td>{!!Form::label('articulo', $pago->articulo)!!}</td>
-            <td>{!!Form::label('', $pago->otrosart)!!}</td>
-            <td>{!!Form::label('cantidad', $pago->cantidad)!!}</td>
-            <td>{!!Form::label('', $pago->otrastr)!!}</td>
+            <td>{!!Form::label('despacho', $order->despacho, ['class' => 'textarea3'])!!}</td>
+            <td>{!!Form::label('articulo_cliente', $order->articulo_cliente)!!}</td>
+            <td>{!!Form::label('', $order->otros_articulos)!!}</td>
+            <td>{!!Form::label('cantidad_cliente', $order->cantidad_cliente)!!}</td>
+            <td>{!!Form::label('', $order->otros_pagos)!!}</td>
         </tr>
-        </table><br/><br/>
+    </table><br/><br/>
 
-        @if($envio)
+        @if($order->destinatario)
 
         <table id="tabla1">
         <tr height="50">
             <h2>Datos de Envio</h2>
-            <th class='textarea2'>Nombre</th>
+            <th class='textarea2'>Destinatario</th>
             <th class='textarea2'>Nro Cedula</th>
             <th class='textarea2'>Telefono</th>
             <th class='textarea3'>Direccion</th>
@@ -93,18 +85,20 @@ Verificar Pago
         </tr>
 
         <tr height="50">
-            <td>{!!Form::label('nombre', $envio->nombre)!!}</td>
-            <td>{!!Form::label('cedula', $envio->cedula)!!}</td>
-            <td>{!!Form::label('telefono', $envio->telefono)!!}</td>
-            <td>{!!Form::label('direccion', $envio->direccion)!!}</td>
-            <td>{!!Form::label('ciudad', $envio->ciudad)!!}</td>
-            <td><input type ='button' class="btn btn-warning"  value = 'Editar' onclick="location.href = '{{ route('orders.shipedit', $envio->id) }}'"/></td>
+            <td>{!!Form::label('destinatario', $order->destinatario)!!}</td>
+            <td>{!!Form::label('cedula', $order->cedula)!!}</td>
+            <td>{!!Form::label('telefono', $order->telefono)!!}</td>
+            <td>{!!Form::label('direccion_envio', $order->direccion_envio)!!}</td>
+            <td>{!!Form::label('ciudad_envio', $order->ciudad_envio)!!}</td>
+            <td><input type ='button' class="btn btn-warning"  value = 'Editar' onclick="location.href = '{{ route('orders.shipedit', $order->pedidos_id) }}'"/></td>
         </tr>
         </table><br/><br/>
 
         @endif
 
-        <table id="tabla1">
+@foreach($orders as $ord)
+
+    <table id="tabla1">
         <tr height="50">
             <h2>Datos de Oferta</h2>
             <th>Nro Oferta</th>
@@ -118,41 +112,19 @@ Verificar Pago
         </tr>
 
         <tr height="50">
-            <td>{!!Form::label('codigo_venta', $order->codigo_venta)!!}</td>
-            <td>{!!Form::label('titulo_publicacion', $order->titulo_publicacion)!!}</td>
-            <td>{!!Form::label('codigo_profit', $order->codigo_profit)!!}</td>
-            <td>{!!Form::label('cantidad', $order->cantidad)!!}</td>
-            <td>{!!Form::label('costo', $order->costo)!!}</td>
-            <td>{!!Form::label('fecha', $order->fecha)!!}</td>
-            <td>{!!Form::label('estatus', $order->estatus)!!}</td>
-            <td>{!!Form::label('pedido_profit',$order->pedido_profit, ['class' => 'textarea1'])!!}</td>
+            <td>{!!Form::label('codigo_venta', $ord->codigo_venta)!!}</td>
+            <td>{!!Form::label('titulo_publicacion', $ord->titulo_publicacion)!!}</td>
+            <td>{!!Form::label('codigo_profit', $ord->codigo_profit)!!}</td>
+            <td>{!!Form::label('cantidad', $ord->cantidad)!!}</td>
+            <td>{!!Form::label('costo', $ord->costo)!!}</td>
+            <td>{!!Form::label('fecha', $ord->fecha)!!}</td>
+            <td>{!!Form::label('estatus', $ord->estatus)!!}</td>
+            <td>{!!Form::label('pedido_profit',$ord->pedido_profit, ['class' => 'textarea1'])!!}</td>
         </tr>
 
-    @endif
+@endforeach
 
-    @if($i>1)
-
-        <tr height="50">
-            <td>{!!Form::label('codigo_venta', $order->codigo_venta)!!}</td>
-            <td>{!!Form::label('titulo_publicacion', $order->titulo_publicacion)!!}</td>
-            <td>{!!Form::label('codigo_profit', $order->codigo_profit)!!}</td>
-            <td>{!!Form::label('cantidad', $order->cantidad)!!}</td>
-            <td>{!!Form::label('costo', $order->costo)!!}</td>
-            <td>{!!Form::label('fecha', $order->fecha)!!}</td>
-            <td>{!!Form::label('estatus', $order->estatus)!!}</td>
-            <td>{!!Form::label('pedido_profit',$order->pedido_profit, ['class' => 'textarea1'])!!}</td>
-        </tr>
-
-    @endif
-
-    @php
-        $i++;
-    @endphp
-
-    @endforeach
-
-        </table>
-
+    </table>
 
 @endsection
 
