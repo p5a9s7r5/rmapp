@@ -1,4 +1,4 @@
-@extends("layouts.plantilla")
+@extends("layouts.plantillaforms")
 
 @section("cabecera")
 
@@ -53,7 +53,7 @@ Confirmar Datos
     <tr height="50">
        <th>{!!Form::label('monto_pago', 'Monto')!!}</th>
        <td>{!!Form::text('monto_pago', session()->get('monto_pago'), ['disabled' => 'disabled', 'class' => 'textarea2'])!!}</td>
-           {!!Form::hidden('monto_pago', session()->get('monto_pago'))!!}
+           {!!Form::hidden('monto_pago', number_format(session()->get('monto_pago'),2, ",", "."))!!}
     </tr>
     <tr height="50">
        <th>{!!Form::label('referencia_pago', 'Numero Referencia')!!}</th>

@@ -2,18 +2,14 @@
 
 @section("cabecera")
 
-<div class="volver">
-{{link_to_route('users.index', 'Regresar')}}
-</div>
-
-Datos Generales
-
 @endsection
 
 
 @section("general")
 
-<table width="600" border="1">
+<h1>Datos Generales</h1><br/><br/>
+
+<table id="tabla2">
     <tr>
        <th width="50">Id</th>
        <th width="200">Nombre</th>
@@ -28,6 +24,13 @@ Datos Generales
      <td>{{$user->acceso}}</td>
     </tr>
 
+</table><br/>
+
+<table style="margin: 0 auto;">
+   <tr height="65">
+      <td><button type="button" onclick="history.back();" class="inputbutton">Volver</button></td>
+      <td><input type ='button' class="btn btn-warning"  value = 'Modificar' onclick="location.href = '{{ route('users.edit', $user->id) }}'"/></td>
+   </tr>
 </table>
 
 @endsection

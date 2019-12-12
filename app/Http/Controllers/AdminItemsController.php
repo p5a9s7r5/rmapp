@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Articulo_Profit;
+use App\Tasa;
 
 class AdminItemsController extends Controller
 {
+
+    public function __construct(){
+
+        $this->middleware('auth');
+        $this->middleware('accessVentas');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +25,9 @@ class AdminItemsController extends Controller
 
         $items = Articulo_Profit::busqueda($request->get('busqueda'))->stock($request->get('stock'))->orderBy('stock_general', 'desc')->paginate(50);
 
-        return view('admin.items.index', compact('items'));
+        $tasa = Tasa::where('nombre', 'paridad')->first();
+
+        return view('admin.items.index', compact('items', 'tasa'));
     }
 
     /**
@@ -50,8 +60,10 @@ class AdminItemsController extends Controller
     public function show($id)
     {
         $item = Articulo_Profit::findOrFail($id);
+        
+        $tasa= Tasa::where('nombre', 'paridad')->first();
 
-        return view('admin.items.show', compact('item'));
+        return view('admin.items.show', compact('item', 'tasa'));
 
     }
 
@@ -96,5 +108,68 @@ class AdminItemsController extends Controller
         //
     }
 
-    
+    public function replenish()
+    {
+
+        $items_all = Articulo_Profit::all();
+
+        foreach($items_all as $item){
+
+            if($item->tiempo_activo > 0){
+
+                $stock_reponer = ($item->vendidos_ml / ($item->tiempo_activo / 40320)) - ($item->stock_disponible - $item->comprometido_temporal);
+                $stock_reponer = ceil ($stock_reponer);
+
+                if($stock_reponer != $item->stock_reponer){
+
+                    Articulo_Profit::where('id', $item->id)->update(['stock_reponer' => $stock_reponer]);
+                }
+            }
+        }
+
+        $items = Articulo_Profit::where('stock_reponer', '>', 0)
+                                ->whereDate('fecha_rep', '<',now()->subDays(60))
+                                ->orderBy('stock_reponer', 'desc')->get();
+
+        return view('admin.items.replenish', compact('items'));
+    }
+
+    public function buy(Request $request)
+    {
+
+        $ids = $request->input('id');
+        $stocks = $request->input('stock_reponer');
+        $titulos = $request->input('titulo');
+
+        $i = 0;
+
+        foreach($ids as $k => $id){
+
+            if($stocks[$k] > 0){
+
+                $items [$i] = array('id' => $ids[$k],
+                                    'stock_reponer' => $stocks[$k],
+                                    'titulo' => $titulos[$k] );
+                          
+
+                $i++;
+            }
+        }
+
+        return view('admin.items.buy', compact('items'));
+    }
+
+    public function confirmbuy(Request $request)
+    {
+
+        $ids = $request->input('id');
+
+        foreach($ids as $k => $id){
+
+            Articulo_Profit::where('id', $ids[$k])->update(['fecha_rep' => now()]);
+
+        }
+
+        return redirect('/admin');
+    }
 }

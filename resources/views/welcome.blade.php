@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Panel de Administracion</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -61,6 +61,12 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .imgcabecera {
+                float:center;
+                width:400px;
+            }
+
         </style>
     </head>
     <body>
@@ -81,7 +87,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Panel de Administracion
                 </div>
 
                 <div class="links">

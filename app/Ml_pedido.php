@@ -20,7 +20,7 @@ class Ml_pedido extends Model
 
         if($busqueda != ""){
 
-            $query->where(\DB::raw("CONCAT(codigo_venta, seudonimo, nombre, titulo_publicacion, pedido_profit, telefono, ubicacion, destinatario, cedula)"), "LIKE", "%$busqueda%");
+            $query->where(\DB::raw("CONCAT(codigo_venta, seudonimo, nombre, titulo_publicacion, pedido_profit, telefono, ubicacion)"), "LIKE", "%$busqueda%");
 
         }
 

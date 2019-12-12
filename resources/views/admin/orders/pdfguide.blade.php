@@ -63,6 +63,14 @@
             width:250px;
         }
 
+        .regresar {
+                color: #636b6f;
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+            }
+
     </style>
 
 
@@ -114,7 +122,34 @@
        <th>Monto:</th>
        <td>{{$order->monto_pago}}</td>
     </tr>
-</table>
+</table><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+<table id="tabla">
+    <tr height="50">
+       <td width="17%">Nombre ML:</td>
+       <td>{{$order->nombre}}</td>
+    </tr>
+    <tr height="50">
+       <td>Articulo Ofertado:</td>
+       <td>{{$order->titulo_publicacion}}</td>
+    </tr>
+    <tr height="50">
+       <td>Articulo segun Cliente:</td>
+       <td>{{$order->articulo_cliente}}</td>
+    </tr>
+    <tr height="50">
+       <td>Otros Articulos:</td>
+       <td>{{$order->otros_articulos}}</td>
+    </tr>
+    <tr height="50">
+       <td>Total Articulos:</td>
+       <td>{{$order->cantidad_cliente}}</td>
+    </tr>
+</table><br/><br/><br/>
+
+<div class="regresar">
+    {{link_to_route('orders.shipping', '< Volver')}}
+</div>
 
 </body>
 </html>

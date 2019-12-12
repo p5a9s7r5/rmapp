@@ -2,17 +2,12 @@
 
 @section("cabecera")
 
-<div class="volver">
-{{link_to_route('orders.index', 'Todos los Pedidos')}}
-</div>
-
-Pagos por Verificar
-
 @endsection
 
 
 @section("general")
 
+<h1>Pagos por Verificar</h1><br/><br/>
 
 <div>
 <table id="tabla1">
@@ -20,30 +15,53 @@ Pagos por Verificar
     <tr height="50">
        <th>Despacho</th>
        <th>Seudonimo</th>
-       <th>Nombre</th>
-       <th>Articulo</th>
-       <th>Monto</th>
+       <th>Fecha</th>
        <th>Banco</th>
+       <th>Banco Origen</th>
+       <th>Monto</th>
+       <th>Referencia</th>
        <th>Pedido Profit</th>
-       <th>Ver Informacion</th>
+       <th>Otros Articulos</th>
+       <th>Factura</th>
+       <th>Verificar</th>
+       <th>Modificar</th>
     </tr>
     </thead>
  
     <tbody>
-    @if($orders)
-        @foreach($orders as $order)
-            <tr height="50">
-             <td>{{$order->despacho}}</td>
-             <td>{{$order->seudonimo}}</td>
-             <td>{{$order->nombre}}</td>
-             <td>{{$order->titulo_publicacion}}</td>
-             <td>{{$order->costo}}</td>
-             <td>{{$order->banco}}</td>
-             <td>{{$order->pedido_profit}}</td>
-             <td>{{link_to_route('orders.paycheck', 'Ver Datos', $order->pedidos_id)}}</td>
-            </tr>
-        @endforeach
-    @endif
+    @foreach($orders as $order)
+
+        {!! Form::model($order, ['method' => 'PUT', 'action' => ['AdminOrdersController@updatepay', $order->pedidos_id]]) !!}
+
+        <tr height="50">
+            <td>{{$order->despacho}}</td>
+                {!!Form::hidden('despacho', $order->despacho)!!}
+            <td>{{$order->seudonimo}}</td>
+            <td>{{Form::label('fecha_pago', $order->fecha_pago)}}</td>
+                {!!Form::hidden('fecha_pago', $order->fecha_pago)!!}
+            <td>{{$order->banco}}</td>
+                {!!Form::hidden('banco', $order->banco)!!}
+            <td>{{$order->interbancario}}</td>
+                {!!Form::hidden('interbancario', $order->interbancario)!!}
+            <td>{{$order->monto_pago}}</td>
+                {!!Form::hidden('monto_pago', $order->monto_pago)!!}
+            <td>{{$order->referencia_pago}}</td>
+                {!!Form::hidden('referencia_pago', $order->referencia_pago)!!}
+            <td>{{$order->pedido_profit}}</td>
+                {!!Form::hidden('pedido_profit', $order->pedido_profit)!!}
+            @if($order->otros_articulos)
+                <td>Si</td>
+            @else
+                <td>No</td>
+            @endif
+            <td>{!!Form::text('factura_profit', $order->factura_profit, ['class' => 'textarea1'])!!}</td>
+            <td>{!!Form::submit('Aprobar')!!}</td>
+            <td><input type ='button' class="btn btn-warning"  value = 'Datos' onclick="location.href = '{{ route('orders.paycheck', $order->pedidos_id) }}'"/></td>
+        </tr>
+
+        {!! Form::close() !!}
+
+    @endforeach
     </tbody>
 </table>
 </div>

@@ -1,4 +1,4 @@
-@extends("layouts.plantilla")
+@extends("layouts.plantillaforms")
 
 @section("cabecera")
 
@@ -25,7 +25,7 @@ Formulario de Pagos
     </tr>
     <tr height="50">
        <th>{!!Form::label('articulo', 'Articulo Comprado')!!}</th>
-       <td>{!!Form::text('articulo_cliente', $order->titulo_publicacion, ['required'=>'required', 'maxlength'=> 80, 'class' => 'textarea3'])!!}</td>
+       <td>{!!Form::text('articulo_cliente', $order->titulo_publicacion . ' - ' . $order->variacion_nombre, ['required'=>'required', 'maxlength'=> 80, 'class' => 'textarea3'])!!}</td>
     </tr>
     <tr height="50">
        <th>{!!Form::label('otrosa', 'Compras Articulos Adicionales? ')!!}</th>
@@ -59,7 +59,7 @@ Formulario de Pagos
     </tr>
     <tr height="50">
        <th>{!!Form::label('monto_pago', 'Monto')!!}</th>
-       <td>{!!Form::text('monto_pago', $order->costo, ['required'=>'required', 'maxlength'=> 20, 'class' => 'textarea2'])!!}</td>
+       <td>{!!Form::text('monto_pago', $order->costo*$order->cantidad, ['required'=>'required', 'maxlength'=> 20, 'class' => 'textarea2'])!!}</td>
     </tr>
     <tr height="50">
        <th>{!!Form::label('referencia_pago', 'Numero Referencia')!!}</th>
@@ -67,8 +67,8 @@ Formulario de Pagos
     </tr>
     <tr height="50">
        <th>{!!Form::label('otrast', 'Realizaste mas de una transferencia? ')!!}</th>
-       <td><input type="radio" name="hab3" onclick="otrastr.disabled=false" />Si 
-           <input type="radio" name="hab3" onclick="otrastr.disabled=true" checked="checked"/>No</td>
+       <td><input type="radio" name="hab3" onclick="otros_pagos.disabled=false" />Si 
+           <input type="radio" name="hab3" onclick="otros_pagos.disabled=true" checked="checked"/>No</td>
     </tr>
     <tr height="50">
        <th>{!!Form::label('otros_pagos', 'Datos Transferencias Adicionales')!!}</th>

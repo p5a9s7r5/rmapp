@@ -45,6 +45,25 @@ class User extends Authenticatable
         }
 
             return false;
-    } 
+    }
 
+    public function esOper(){
+
+        if($this->acceso=='admin' or $this->acceso=='operaciones'){
+
+            return true;
+        }
+
+            return false;
+    }
+
+    public function esVentas(){
+
+        if($this->acceso=='admin' or $this->acceso=='operaciones' or $this->acceso=='ventas'){
+
+            return true;
+        }
+
+            return false;
+    }
 }

@@ -10,6 +10,13 @@ use App\Mensaje;
 
 class AdminOrdersController extends Controller
 {
+
+    public function __construct(){
+
+        $this->middleware('auth');
+        $this->middleware('accessVentas');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -98,7 +105,6 @@ class AdminOrdersController extends Controller
 
             $articuloid = Articulo_Profit::findOrFail($articulo->id);
             $articuloid->comprometido_temporal = $articulo->comprometido_temporal - $request->cantidad;
-            $articuloid->vendidos_ml = $articulo->vendidos_ml + $request->cantidad;
             $articuloid->save();
 
         }else{
@@ -106,13 +112,24 @@ class AdminOrdersController extends Controller
             $estatus = $request->estatus;
         }
 
-        if($request->pedido_profit = 0 or $request->pedido_profit == ''){
+        if($request->estatus == 'Duplicado'){
 
             $pedido_profit = 100;
+
+            $articulo = Articulo_Profit::where('codigo_profit', $request->codigo_profit)->first();
+
+            $articuloid = Articulo_Profit::findOrFail($articulo->id);
+            $articuloid->vendidos_ml = $articulo->vendidos_ml - $request->cantidad;
+            $articuloid->save();
 
         }else{
 
             $pedido_profit = $request->pedido_profit;
+        }
+
+        if($request->estatus == 'Agotado'){
+
+            $pedido_profit = 100;
         }
 
         // Actualizamos el status del pedido
@@ -151,7 +168,7 @@ class AdminOrdersController extends Controller
 
             Articulo_Profit::where('comprometido_temporal', '<>', 0)->update(['comprometido_temporal' => 0]);
 
-            return ('No hay pedidos nuevos');
+            return redirect('/admin/alert/2');
 
         }
     }

@@ -2,16 +2,12 @@
 
 @section("cabecera")
 
-<div class="volver">
-{{link_to_route('orders.index', 'Ver Pedidos')}}
-</div>
-
-Cargar Pedidos Profit
-
 @endsection
 
 
 @section("general")
+
+<h1>Cargar Pedidos Profit</h1><br/><br/>
 
 <table id="tabla1">
     <tr height="50">
@@ -19,7 +15,7 @@ Cargar Pedidos Profit
        <th>Nombre</th>
        <th>Articulo</th>
        <th>Codigo Profit</th>
-       <th>Cantidad</th>
+       <th>Cant</th>
        <th>Monto</th>
        <th>Fecha</th>
        <th>Estatus</th>
@@ -53,7 +49,6 @@ Cargar Pedidos Profit
     @endforeach
 
 </table>
-
 
 @endsection
 

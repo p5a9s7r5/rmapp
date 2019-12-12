@@ -2,18 +2,18 @@
 
 @section("cabecera")
 
-Administrador Pedidos ML
-
 @endsection
 
-
 @section("general")
+
+<h1>Administrador Pedidos ML</h1>
 
 <table style="margin: 0 auto;">
 <nav>
         {!! Form::model(Request::all(), ['action' => 'AdminOrdersController@index', 'method' => 'GET', 'class' => 'form-inline']) !!}
     <th>{!! Form::label('estatus', 'Estatus') !!}</th>
     <th>{!! Form::select('estatus', config('options.status')) !!}</th>
+    <th width="7%"></th>
     <th>{!! Form::text('busqueda', null, ['class' => 'buscador', 'placeholder' => 'Busqueda']) !!}</th>
     <th>{!! Form::submit('Buscar', ['class' => 'buscador']) !!}</th>
         {!! Form::close() !!}

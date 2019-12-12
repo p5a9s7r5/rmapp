@@ -1,4 +1,4 @@
-@extends("layouts.plantilla")
+@extends("layouts.plantillaforms")
 
 @section("cabecera")
 
@@ -12,6 +12,10 @@
 <div class="informacion">
 
 <table>
+
+    <tr height="150">
+       <th></th>
+    </tr>
     <tr height="50">
        <th>Gracias por su información. Puede retirar por nuestra tienda de lunes a viernes de 9am a 12pm y 1pm a 4pm</th>
     </tr>

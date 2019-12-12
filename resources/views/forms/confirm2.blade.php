@@ -1,4 +1,4 @@
-@extends("layouts.plantilla")
+@extends("layouts.plantillaforms")
 
 @section("cabecera")
 
@@ -12,6 +12,9 @@
 <div class="informacion">
 
 <table>
+    <tr height="150">
+       <th></th>
+    </tr>
     <tr height="50">
        <th>Gracias por su información. En las próximas horas estaremos procesando su registro</th>
     </tr>

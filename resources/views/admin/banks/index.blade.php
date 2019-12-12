@@ -2,12 +2,11 @@
 
 @section("cabecera")
 
-Estados de Cuenta
-
 @endsection
 
-
 @section("general")
+
+<h1>Estados de Cuenta Bancarios</h1>
 
 <table style="margin: 0 auto;">
 <nav>
@@ -22,10 +21,10 @@ Estados de Cuenta
     <th>{!! Form::label('banco', 'Banco: ') !!}</th>
     <th>{!! Form::select('banco', config('options.bancos'), '') !!}</th>
 </tr>
-<tr height="50">
-    <th colspan="1"></th>
+<tr height="80">
+    <th colspan="2"></th>
     <th colspan="3">{!! Form::text('busqueda', null, ['class' => 'buscador', 'placeholder' => 'Busqueda']) !!}</th>
-    <th colspan="2">{!! Form::submit('Buscar', ['class' => 'buscador']) !!}</th>
+    <th colspan="1">{!! Form::submit('Buscar', ['class' => 'buscador']) !!}</th>
     <th colspan="1"></th>
         {!! Form::close() !!}
 </tr>
@@ -53,7 +52,7 @@ Estados de Cuenta
              <td>{{$line->banco}}</td>
              <td>{{$line->descripcion}}</td>
              <td>{{$line->referencia}}</td>
-             <td>{{$line->monto}}</td>
+             <td>{{number_format($line->monto,2, ",", ".")}}</td>
              <td>{{$line->tipo}}</td>
             </tr>
     @endforeach

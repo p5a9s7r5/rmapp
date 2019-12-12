@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Banco;
 use Maatwebsite\Excel\Facades\Excel;
-use App\imports\BanksImport;
+use App\Imports\BanksImport;
 
 class AdminBanksController extends Controller
 {
+
+    public function __construct(){
+
+        $this->middleware('auth');
+        $this->middleware('accessOper');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,7 +52,7 @@ class AdminBanksController extends Controller
     public function store(Request $request)
     {
 
-        Banco::where('fecha', $request->fecha)->delete();;
+        Banco::where('fecha', $request->fecha)->delete();
 
         $import = new BanksImport;
         $import->setFecha($request->fecha);

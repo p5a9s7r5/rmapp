@@ -2,17 +2,12 @@
 
 @section("cabecera")
 
-<div class="volver">
-{{link_to_route('orders.index', 'Todos los Pedidos')}}
-</div>
-
-Guias por Cargar
-
 @endsection
 
 
 @section("general")
 
+<h1>Guias por Cargar</h1><br/><br/>
 
 <div>
 <table id="tabla1">

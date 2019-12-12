@@ -2,23 +2,18 @@
 
 @section("cabecera")
 
-<div class="volver">
-{{link_to_route('items.show', 'Regresar', $item->id)}}
-</div>
-
-Editar Articulo
-
 @endsection
 
-
 @section("general")
+
+<h1>Editar Articulo</h1>
 
 {!! Form::model($item, ['method' => 'PUT', 'action' => ['AdminItemsController@update', $item->id]]) !!}
 
 <table id="tabla2">
 
     <tr height="50">
-       <th>{!!Form::label('id', 'Id: ')!!}</th>
+       <th width="30%">{!!Form::label('id', 'Id: ')!!}</th>
        <td>{!!Form::text('codigo_profit', $item->id, ['class' => 'textarea2'])!!}</td>
     </tr>
     <tr height="50">
@@ -50,15 +45,14 @@ Editar Articulo
        <td>{!!Form::text('variante_ml4', $item->variante_ml4, ['class' => 'textarea2'])!!}</td>
     </tr>
     
-</table>
-
-<br/>
+</table><br/>
 
 <div>
-<table>
+<table style="margin: 0 auto;">
 
 <tr height="50">
-   <th>{!!Form::reset('Limpiar')!!}</th>
+   <td><button type="button" onclick="history.back();" class="inputbutton">Volver</button></td>
+   <td>{!!Form::reset('Limpiar')!!}</td>
    <td>{!!Form::submit('Actualizar')!!}</td>
 </tr>
 

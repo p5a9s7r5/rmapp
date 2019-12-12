@@ -22,7 +22,6 @@
 
             .cabecera {
                 font-size: 50px;
-                height: 50vh;
                 align-items: center;
                 display: flex;
                 justify-content: center;
@@ -149,7 +148,7 @@
 
             .textarea0[type=text] {
                 width: 60px;
-                padding: 12px 20px;
+                padding: 12px 10px;
                 margin: 8px 0;
                 box-sizing: border-box;
                 outline: none;}
@@ -158,7 +157,7 @@
 
             .textarea1[type=text] {
                 width: 120px;
-                padding: 12px 20px;
+                padding: 12px 10px;
                 margin: 8px 0;
                 box-sizing: border-box;
                 outline: none;}
@@ -167,7 +166,7 @@
 
             .textarea2[type=text] {
                 width: 180px;
-                padding: 12px 20px;
+                padding: 12px 10px;
                 margin: 8px 0;
                 box-sizing: border-box;
                 outline: none;}
@@ -176,11 +175,11 @@
 
             .textarea3[type=text] {
                 width: 400px;
-                padding: 12px 20px;
+                padding: 12px 10px;
                 margin: 8px 0;
                 box-sizing: border-box;
                 outline: none;}
-            .textarea2[type=text]:focus {
+            .textarea3[type=text]:focus {
                 background-color: lightblue;}
 
             .informacion {
@@ -267,6 +266,19 @@
                     background-color: #4CAF50;
                     color: white;}
 
+            #tabla5{
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                border-spacing: 0;
+                width: 60%;
+                border: 1px solid #ddd;
+                margin: auto;}
+                #tabla5 th, #tabla5td {
+                    text-align: center;
+                    padding: 16px;}
+                #tabla5 tr:nth-child(even) {
+                    background-color: #f2f2f2}
+
             input[type=button], input[type=submit], input[type=reset] {
                 background-color: #4CAF50;
                 border: none;
@@ -296,6 +308,63 @@
                 cursor: pointer;
             }
 
+            input[type=date] {
+                background: transparent;
+                border: none;
+                font-size: 14px;
+                height: 30px;
+                padding: 1px;
+                width: 150px;
+                border: 2px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+                background-color: white;
+            }
+
+            select {
+                background: transparent;
+                border: none;
+                font-size: 14px;
+                height: 37px;
+                padding: 5px;
+                width: 180px;
+                border: 2px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+                background-color: white;
+            }
+
+            input[type=checkbox] {
+                position: relative;
+	            cursor: pointer;
+            }
+            input[type=checkbox]:before {
+                content: "";
+                display: block;
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                top: 0;
+                left: 0;
+                border: 2px solid #4CAF50;
+                border-radius: 3px;
+                background-color: white;
+            }
+            input[type=checkbox]:checked:after {
+                content: "";
+                display: block;
+                width: 5px;
+                height: 10px;
+                border: solid #4CAF50;
+                border-width: 0 2px 2px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+                position: absolute;
+                top: 2px;
+                left: 6px;
+            }
+
             .buscador{
                 width: 95%;
                 box-sizing: border-box;
@@ -306,7 +375,68 @@
                 background-image: url('searchicon.png');
                 background-position: 10px 10px; 
                 background-repeat: no-repeat;
-                padding: 8px 16px 8px 40px;
+                padding: 8px 8px 8px 8px;
+            }
+
+            .navbar {
+                overflow: hidden;
+                background-color: #464646;
+                width: 80%;
+                align-items: center;
+                margin: auto;
+                margin-bottom: 40px;
+            }
+            .navbar a {
+                float: left;
+                font-size: 20px;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+            .subnav {
+                float: left;
+                overflow: hidden;
+            }
+            .subnav .subnavbtn {
+                font-size: 20px;  
+                border: none;
+                outline: none;
+                color: white;
+                padding: 14px 16px;
+                background-color: inherit;
+                font-family: inherit;
+                margin: 0;
+            }
+            .navbar a:hover, .subnav:hover .subnavbtn {
+                background-color: #4CAF50;
+            }
+            .subnav-content {
+                display: none;
+                position: absolute;
+                left: 10%;
+                background-color: #4CAF50;
+                width: 80%;
+                z-index: 1;
+                align-items: center;
+                justify-content: center;
+                margin: auto;
+            }
+            .subnav-content a {
+                float: left;
+                color: white;
+                text-decoration: none;
+            }
+            .subnav-content a:hover {
+                background-color: #eee;
+                color: black;
+            }
+            .subnav:hover .subnav-content {
+                display: block;
+            }
+            .navbar a.active {
+                background-color: #4CAF50;
+                color: white;
             }
 
         </style>
@@ -315,21 +445,55 @@
         
         <div class="cabecera">
 
-        @yield("cabecera")
+            @yield("cabecera")
+
+        </div>
+
+        <div class="navbar">
+
+            @yield("navbar")
+
+                <a href="/admin">Inicio</a>
+                <div class="subnav">
+                    <button class="subnavbtn">Articulos <i class="fa fa-caret-down"></i></button>
+                        <div class="subnav-content">
+                            <a href="/admin/items">Articulos</a>
+                            <a href="/admin/items/replenish">Reposicion Stock</a>
+                        </div>
+                </div> 
+                <div class="subnav">
+                    <button class="subnavbtn">Pedidos <i class="fa fa-caret-down"></i>	</button>
+                        <div class="subnav-content">
+                            <a href="/admin/orders">Pedidos</a>
+                            <a href="/admin/orders/aprofit">Cargar Profit</a>
+                            <a href="/admin/orders/shipping">Pedidos por Enviar</a>
+                            <a href="/admin/orders/guides">Guias por Cargar</a>
+                        </div>
+                </div> 
+                <div class="subnav">
+                    <button class="subnavbtn">Bancos <i class="fa fa-caret-down"></i></button>
+                        <div class="subnav-content">
+                            <a href="/admin/banks">Estados de Cuenta</a>
+                            <a href="/admin/banks/create">Cargar Bancos</a>
+                            <a href="/admin/orders/payments">Pagos por Verificar</a>
+                        </div>
+                </div> 
+                <a href="/admin/taxes">Tasas</a>
+                <a href="/admin/users">Usuarios</a>
 
         </div>
 
         <div class="general">
 
-        @yield("general")
+            @yield("general")
 
         </div>
 
         <div class="pie">
 
-        @yield("pie")
+            @yield("pie")
 
-        <br/><br/><br/><br/><br/><br/>
+            <br/><br/><br/><br/><br/><br/>
 
         </div>
 

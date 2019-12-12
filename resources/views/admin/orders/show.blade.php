@@ -2,16 +2,11 @@
 
 @section("cabecera")
 
-<div class="volver">
-{{link_to_route('orders.index', 'Regresar')}}
-</div>
-
-Datos Generales
-
 @endsection
 
-
 @section("general")
+
+<h1>Datos Generales</h1><br/><br/>
 
 <table id="tabla3">
 
@@ -179,6 +174,7 @@ Datos Generales
 <div>
 <table style="margin: 0 auto;">
    <tr>
+      <td><button type="button" onclick="history.back();" class="inputbutton">Volver</button></td>
       @if($order->destinatario)
       <td><input type ='button' class="btn btn-warning"  value = 'Editar Envio' onclick="location.href = '{{ route('orders.shipedit', $order->pedidos_id) }}'"/></th>
       @endif

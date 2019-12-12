@@ -2,14 +2,13 @@
 
 @section("cabecera")
 
-Administrador Usuarios
-
 @endsection
-
 
 @section("general")
 
-<table width="1000" border="1" style="margin: 0 auto;">
+<h1>Administrador Usuarios</h1><br/><br/>
+
+<table id="tabla1">
     <tr height="50">
        <th width="50">Id</th>
        <th width="200">Nombre</th>
@@ -27,9 +26,9 @@ Administrador Usuarios
              <td>{{$user->name}}</td>
              <td>{{$user->email}}</td>
              <td>{{$user->acceso}}</td>
-             <td>{{link_to_route('users.show', 'Ver Datos', $user->id)}}</td>
-             <td>{{link_to_route('users.edit', 'Modificar Usuario', $user->id)}}</td>
-             <td><a href="users/{{$user->id}}/delete">Eliminar Usuario</a></td>
+             <td><input type ='button' class="btn btn-warning"  value = 'Ver Datos' onclick="location.href = '{{ route('users.show', $user->id) }}'"/></td>
+             <td><input type ='button' class="btn btn-warning"  value = 'Modificar' onclick="location.href = '{{ route('users.edit', $user->id) }}'"/></td>
+             <td><input type ='button' class="btn btn-warning"  value = 'Eliminar' onclick="location.href = '{{ route('users.delete', $user->id) }}'"/></td>
             </tr>
         @endforeach
     @endif

@@ -2,20 +2,14 @@
 
 @section("cabecera")
 
-<div class="volver">
-{{link_to_route('orders.payments', 'Volver')}}
-</div>
-
-Verificar Pago
-
 @endsection
-
 
 @section("general")
 
+<h1>Verificar Pago</h1><br/><br/>
+
     <table id="tabla1">
         <tr height="50">
-            <h2>Cliente</h2>
             <th>Seudonimo:</th>
             <td>{{$order->seudonimo}}</td>
             <th>Nombre:</th>
@@ -34,7 +28,6 @@ Verificar Pago
             <th>Monto</th>
             <th>Referencia</th>
             <th>Factura Profit</th>
-            <th>Confirmar</th>
         </tr>
 
         {!! Form::model($order, ['method' => 'PUT', 'action' => ['AdminOrdersController@updatepay', $order->pedidos_id]]) !!}
@@ -46,6 +39,13 @@ Verificar Pago
             <td>{!!Form::text('monto_pago', $order->monto_pago, ['class' => 'textarea1'])!!}</td>
             <td>{!!Form::text('referencia_pago', $order->referencia_pago, ['class' => 'textarea2'])!!}</td>
             <td>{!!Form::text('factura_profit', $order->factura_profit, ['class' => 'textarea2'])!!}</td>
+            
+        </tr>
+    </table><br/>
+
+    <table style="margin: 0 auto;">
+        <tr height="65">
+            <td><button type="button" onclick="history.back();" class="inputbutton">Volver</button></td>
             <td>{!!Form::submit('Aprobar')!!}</td>
         </tr>
     </table><br/><br/>
@@ -92,15 +92,15 @@ Verificar Pago
             <td>{!!Form::label('ciudad_envio', $order->ciudad_envio)!!}</td>
             <td><input type ='button' class="btn btn-warning"  value = 'Editar' onclick="location.href = '{{ route('orders.shipedit', $order->pedidos_id) }}'"/></td>
         </tr>
-        </table><br/><br/>
+        </table><br/>
 
         @endif
 
-@foreach($orders as $ord)
+        <h2>Datos de Oferta</h2>
 
     <table id="tabla1">
         <tr height="50">
-            <h2>Datos de Oferta</h2>
+
             <th>Nro Oferta</th>
             <th>Articulo</th>
             <th>Codigo Profit</th>
@@ -110,6 +110,8 @@ Verificar Pago
             <th>Estatus</th>
             <th>Pedido Profit</th>
         </tr>
+
+        @foreach($orders as $ord)
 
         <tr height="50">
             <td>{!!Form::label('codigo_venta', $ord->codigo_venta)!!}</td>
@@ -122,9 +124,10 @@ Verificar Pago
             <td>{!!Form::label('pedido_profit',$ord->pedido_profit, ['class' => 'textarea1'])!!}</td>
         </tr>
 
-@endforeach
+        @endforeach
 
-    </table>
+    </table><br/><br/>
+
 
 @endsection
 

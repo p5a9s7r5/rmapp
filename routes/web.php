@@ -18,32 +18,40 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/alert', 'HomeController@alert')->name('alert');
 
-Auth::routes();
+Route::get('/admin', 'AdminController@index')->name('admin');
+Route::get('/admin/alert/{id}', 'AdminController@alert')->name('admin.alert');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('admin/users', 'AdminUsersController');
+Route::get('/admin/users/{id}/delete', 'AdminUsersController@delete')->name('users.delete');
 
-Route::resource('admin/users', 'AdminUsersController')->middleware('auth');
-Route::get('/admin/users/{id}/delete', 'AdminUsersController@delete')->middleware('auth');
+Route::get('/admin/orders/aprofit', 'AdminOrdersController@aprofit')->middleware('accessOper');
+Route::get('/admin/orders/payments', 'AdminOrdersController@payments')->middleware('accessOper')->name('orders.payments');
+Route::get('/admin/orders/shipping', 'AdminOrdersController@shipping')->name('orders.shipping');
+Route::get('/admin/orders/paycheck/{id}', 'AdminOrdersController@paycheck')->middleware('accessOper')->name('orders.paycheck');
+Route::put('/admin/orders/paycheck/{id}', 'AdminOrdersController@updatepay')->middleware('accessOper');
+Route::get('/admin/orders/shipedit/{id}', 'AdminOrdersController@shipedit')->middleware('accessOper')->name('orders.shipedit');
+Route::put('/admin/orders/shipedit/{id}', 'AdminOrdersController@updateship')->middleware('accessOper');
+Route::get('/admin/orders/guides', 'AdminOrdersController@guides')->name('orders.guides');
+Route::put('/admin/orders/guides/{id}', 'AdminOrdersController@updateguide');
+Route::get('/admin/orders/pdfguide/{id}', 'AdminOrdersController@pdfguide')->name('orders.pdfguide');
+Route::resource('admin/orders', 'AdminOrdersController');
 
-Route::get('/admin/orders/aprofit', 'AdminOrdersController@aprofit')->middleware('auth');
-Route::get('/admin/orders/payments', 'AdminOrdersController@payments')->middleware('auth')->name('orders.payments');
-Route::get('/admin/orders/shipping', 'AdminOrdersController@shipping')->middleware('auth')->name('orders.shipping');
-Route::get('/admin/orders/guides', 'AdminOrdersController@guides')->middleware('auth')->name('orders.guides');
-Route::get('/admin/orders/pdfguide/{id}', 'AdminOrdersController@pdfguide')->middleware('auth')->name('orders.pdfguide');
-Route::get('/admin/orders/paycheck/{id}', 'AdminOrdersController@paycheck')->middleware('auth')->name('orders.paycheck');
-Route::put('/admin/orders/paycheck/{id}', 'AdminOrdersController@updatepay')->middleware('auth');
-Route::get('/admin/orders/shipedit/{id}', 'AdminOrdersController@shipedit')->middleware('auth')->name('orders.shipedit');
-Route::put('/admin/orders/shipedit/{id}', 'AdminOrdersController@updateship')->middleware('auth');
-Route::put('/admin/orders/guides/{id}', 'AdminOrdersController@updateguide')->middleware('auth');
-Route::resource('admin/orders', 'AdminOrdersController')->middleware('auth');
+Route::get('/admin/items/replenish', 'AdminItemsController@replenish')->name('items.replenish');
+Route::post('/admin/items/buy', 'AdminItemsController@buy')->name('items.buy');
+Route::post('/admin/items/confirmbuy', 'AdminItemsController@confirmbuy')->name('items.confirmbuy');
+Route::resource('admin/items', 'AdminItemsController');
 
-Route::resource('admin/items', 'AdminItemsController')->middleware('auth');
+Route::resource('admin/banks', 'AdminBanksController');
 
-Route::resource('admin/banks', 'AdminBanksController')->middleware('auth');
+Route::get('/admin/taxes', 'AdminTaxesController@index')->name('admin.taxes');
+Route::put('/admin/taxes/{id}', 'AdminTaxesController@update');
 
+Route::get('forms/ml/prueba/', 'FormsController@prueba');
 Route::get('forms/ml/{id}', 'FormsController@mlpay');
 Route::post('forms/ml/', 'FormsController@confirmpay');
 Route::post('forms/ml/confirmpay/', 'FormsController@pay');
 Route::post('forms/ml2/', 'FormsController@confirmship');
 Route::post('forms/ml/confirmship/', 'FormsController@ship');
+

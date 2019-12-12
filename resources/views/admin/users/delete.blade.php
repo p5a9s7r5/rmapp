@@ -2,41 +2,39 @@
 
 @section("cabecera")
 
-<div class="volver">
-{{link_to_route('users.index', 'Regresar')}}
-</div>
-
-Eliminar Usuario
-
 @endsection
 
 @section("general")
 
+<h1>Eliminar Usuario</h1><br/><br/>
+
 {!! Form::open(['method' => 'DELETE', 'action' => ['AdminUsersController@destroy', $user->id]]) !!}
 
-        {!!Form::token()!!}
-
-<table width="300" border="1">
+<table id="tabla2">
         <tr>
-        <td>Id:</td>
+        <th width="25%">Id:</th>
         <td>{{$user->id}}</td>
         </tr>
         <tr>
-        <td>Nombre:</td>
+        <th>Nombre:</th>
         <td>{{$user->name}}</td>
         </tr>
         <tr>
-        <td>Email:</td>
+        <th>Email:</th>
         <td>{{$user->email}}</td>
         </tr>
         <tr>
-        <td>Acceso:</td>
+        <th>Acceso:</th>
         <td>{{$user->acceso}}</td>
         </tr>
-</table>
-        <br>
+</table><br>
 
-        {!!Form::submit('Eliminar')!!}
+<table style="margin: 0 auto;">
+   <tr height="65">
+      <td><button type="button" onclick="history.back();" class="inputbutton">Volver</button></td>
+      <td>{!!Form::submit('Eliminar')!!}</td>
+   </tr>
+</table>
 
         {!! Form::close() !!}
 

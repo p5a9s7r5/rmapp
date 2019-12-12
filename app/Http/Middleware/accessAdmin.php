@@ -21,7 +21,7 @@ class accessAdmin
 
         if(!$user->esAdmin()){
 
-            return redirect('/');
+            return redirect('/admin/alert/1');
 
         }else{
 

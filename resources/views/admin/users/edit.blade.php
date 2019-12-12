@@ -2,38 +2,38 @@
 
 @section("cabecera")
 
-<div class="volver">
-{{link_to_route('users.index', 'Regresar')}}
-</div>
-
-Modificar Usuarios
-
 @endsection
 
 @section("general")
+
+<h1>Modificar Usuario</h1><br/><br/>
 
 {!! Form::model($user, ['method' => 'PUT', 'action' => ['AdminUsersController@update', $user->id]]) !!}
 
     {!!Form::token()!!}
 
-    <table width="300">
+    <table id="tabla2">
         <tr>
-        <td>{!!Form::label('nombre', 'Nombre:')!!}</td>
-        <td>{!!Form::text('name')!!}</td>
+        <th width="25%">{!!Form::label('nombre', 'Nombre:')!!}</th>
+        <td>{!!Form::text('name', $user->name, ['class' => 'textarea3'])!!}</td>
         </tr>
         <tr>
-        <td>{!!Form::label('email', 'Email:')!!}</td>
-        <td>{!!Form::text('email')!!}</td>
+        <th>{!!Form::label('email', 'Email:')!!}</th>
+        <td>{!!Form::text('email', $user->email, ['class' => 'textarea3'])!!}</td>
         </tr>
         <tr>
-        <td>{!!Form::label('acceso', 'Acceso:')!!}</td>
-        <td>{!!Form::select('acceso', ['admin' => 'Admin', 'operaciones' => 'Operaciones', 'ventas' => 'Ventas'], 'ventas')!!}</td>
+        <th>{!!Form::label('acceso', 'Acceso:')!!}</th>
+        <td>{!!Form::select('acceso', ['admin' => 'Admin', 'operaciones' => 'Operaciones', 'ventas' => 'Ventas'], 'ventas', ['class' => 'textarea3'])!!}</td>
         </tr>
-        <tr>
-        <td>{!!Form::submit('Actualizar')!!}</td>
-        <td>{!!Form::reset('Limpiar')!!}</td>
-        </tr>
-    </table>
+    </table><br/>
+
+<table style="margin: 0 auto;">
+   <tr height="65">
+      <td><button type="button" onclick="history.back();" class="inputbutton">Volver</button></td>
+      <td>{!!Form::reset('Limpiar')!!}</td>
+      <td>{!!Form::submit('Actualizar')!!}</td>
+   </tr>
+</table>
 
 {!! Form::close() !!}
 

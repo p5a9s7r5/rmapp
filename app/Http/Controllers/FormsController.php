@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ml_pedido;
+use App\Mensaje;
 
 class FormsController extends Controller
 {
@@ -11,7 +12,7 @@ class FormsController extends Controller
     public function mlpay($id)
     {
 
-        $order = Ml_pedido::select('pedidos_id','seudonimo','titulo_publicacion','cantidad','costo','nombre','telefono','ubicacion','estatus')
+        $order = Ml_pedido::select('pedidos_id','seudonimo','titulo_publicacion','cantidad','costo','nombre','telefono','ubicacion','estatus','variacion_nombre')
                             ->where('codigo_venta', $id)->firstOrFail();
 
         if($order->estatus == 'Pago Registrado' or $order->estatus == 'Envio Registrado' or $order->estatus == 'Pago Verificado' or $order->estatus == 'Envio Aprobado' or $order->estatus == 'Envio Procesado' or $order->estatus == 'Enviado'){
@@ -66,6 +67,11 @@ class FormsController extends Controller
         $order->save();
 
         $request->session()->flush();
+
+        $mensaje_id = Mensaje::where('order_id', $order->codigo_venta)->first();
+        $mensaje = Mensaje::findOrFail($mensaje_id->id);
+        $mensaje->registrado = 2;
+        $mensaje->save();
         
         return view('forms.confirm1');
 
@@ -94,6 +100,18 @@ class FormsController extends Controller
         $order->save();
 
         $request->session()->flush();
+
+        $mensaje_id = Mensaje::where('order_id', $order->codigo_venta)->first();
+        $mensaje = Mensaje::findOrFail($mensaje_id->id);
+        $mensaje->registrado = 2;
+        $mensaje->save();
+
+        return view('forms.confirm2');
+
+    }
+
+    public function prueba()
+    {
 
         return view('forms.confirm2');
 
