@@ -460,40 +460,47 @@
 
             @yield("navbar")
 
-                <a href="/admin">Inicio</a>
+                <a href={{ route("admin") }}>Inicio</a>
                 <div class="subnav">
                     <button class="subnavbtn">Articulos <i class="fa fa-caret-down"></i></button>
                         <div class="subnav-content">
-                            <a href="/admin/items">Articulos</a>
-                            <a href="/admin/items/replenish">Reposicion Stock</a>
+                            <a href={{ route("items.index") }}>Articulos</a>
+                            <a href={{ route("items.replenish") }}>Reposicion Stock</a>
                         </div>
                 </div> 
                 <div class="subnav">
                     <button class="subnavbtn">Pedidos <i class="fa fa-caret-down"></i>	</button>
                         <div class="subnav-content">
-                            <a href="/admin/orders">Pedidos</a>
-                            <a href="/admin/orders/contact">Por Contactar</a>
-                            <a href="/admin/orders/aprofit">Cargar Profit</a>
-                            <a href="/admin/orders/create">Listado Profit</a>
+                            <a href={{ route("orders.index") }}>Pedidos</a>
+                            <a href={{ route("orders.contact") }}>Por Contactar</a>
+                            <a href={{ route("orders.aprofit") }}>Cargar Profit</a>
+                            <a href={{ route("orders.create") }}>Listado Profit</a>
                         </div>
                 </div> 
                 <div class="subnav">
                     <button class="subnavbtn">Envios <i class="fa fa-caret-down"></i>	</button>
                         <div class="subnav-content">
-                            <a href="/admin/orders/shipping">Pedidos por Enviar</a>
-                            <a href="/admin/orders/guides">Guias por Cargar</a>
+                            <a href={{ route("orders.shipping") }}>Pedidos por Enviar</a>
+                            <a href={{ route("orders.guides") }}>Guias por Cargar</a>
                         </div>
                 </div> 
                 <div class="subnav">
                     <button class="subnavbtn">Bancos <i class="fa fa-caret-down"></i></button>
                         <div class="subnav-content">
-                            <a href="/admin/banks">Estados de Cuenta</a>
-                            <a href="/admin/banks/create">Cargar Bancos</a>
-                            <a href="/admin/orders/payments">Pagos por Verificar</a>
+                            <a href={{ route("banks.index") }}>Estados de Cuenta</a>
+                            <a href={{ route("banks.create") }}>Cargar Bancos</a>
+                            <a href={{ route("orders.payments") }}>Pagos por Verificar</a>
                         </div>
                 </div> 
-                <a href="/admin/taxes">Tasas</a>
-                <a href="/admin/users">Usuarios</a>
+                <a href={{ route("taxes.index") }}>Tasas</a>
+                <div class="subnav">
+                    <button class="subnavbtn">Usuarios <i class="fa fa-caret-down"></i>	</button>
+                        <div class="subnav-content">
+                            <a href={{ route("users.index") }}>Usuarios</a>
+                            <a href={{ route("payroll.index") }}>Control de Asistencia</a>
+                            <a href={{ route("payroll.create") }}>Cargar Asistencia</a>
+                        </div>
+                </div>
 
         </div>
 

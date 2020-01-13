@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\AsistenciasImport;
 use Illuminate\Http\Request;
+use App\Resumen_asistencia;
+use App\Global_asistencia;
+use App\Asistencia;
 use App\User;
 
 class AdminUsersController extends Controller

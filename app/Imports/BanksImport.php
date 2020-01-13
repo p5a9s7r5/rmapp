@@ -6,8 +6,6 @@ use App\Banco;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-
-
 class BanksImport implements ToModel, WithHeadingRow
 {
     /**

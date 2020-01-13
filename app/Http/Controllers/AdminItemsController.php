@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Articulo_Profit;
 use App\Tasa;
+use Automattic\WooCommerce\Client;
 
 class AdminItemsController extends Controller
 {
@@ -91,9 +92,16 @@ class AdminItemsController extends Controller
     public function update(Request $request, $id)
     {
         $item=Articulo_Profit::findOrFail($id);
-        $item->update($request->all());
+        $item->titulo = $request->titulo;
+        $item->nombre_ml = $request->nombre_ml;
+        $item->codigo_profit = $request->codigo_profit;
+        $item->ml3 = $request->ml3;
+        $item->ml5 = $request->ml5;
+        $item->ml4 = $request->ml4;
+        $item->variante_ml4 = $request->variante_ml4;
+        $item->save();
 
-        return view('admin.items');
+        return redirect('/admin/items/'.$id);
         
     }
 
@@ -171,5 +179,46 @@ class AdminItemsController extends Controller
         }
 
         return redirect('/admin');
+    }
+
+    public function woocommerce()
+    {
+
+        $woocommerce = new Client(
+            'https://requiemmedia.co.ve/wp/',
+            'ck_316a73ab2ce873d6f8869beb58d05f5f64f2411f',
+            'cs_030280b64b4ba1961f1dd94976e3d49aac56ce6d',
+            [
+                'wp_api'  => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        $body = [
+            'name'          => 'Mica Tactil Nokia Lumia 520 4.0 Pulgadas',
+            'type'          => 'simple',
+            'regular_price' => '192304',
+            'sku'           => 'MICTACNOK520',
+            'description'   => 'Mica Tactil Nokia Lumia 520 4.0 Pulgadas',
+            'categories'    => [
+                [
+                    'id' => 1,
+                ],
+            ],
+        ];
+        
+
+        $woocommerce->post( 'products', $body );
+
+
+        return redirect('/admin');
+
+        /*$productos = $woocommerce->get('products');
+
+        foreach($productos as $producto){
+
+            print($producto->sku);
+        }*/
+
     }
 }

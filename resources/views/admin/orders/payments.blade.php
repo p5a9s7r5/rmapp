@@ -42,7 +42,7 @@
                 {!!Form::hidden('banco', $order->banco)!!}
             <td>{{$order->interbancario}}</td>
                 {!!Form::hidden('interbancario', $order->interbancario)!!}
-            <td>{{number_format($order->monto_pago,0, ",", ".")}}</td>
+            <td>{{$order->monto_pago}}</td>
                 {!!Form::hidden('monto_pago', $order->monto_pago)!!}
             <td>{{$order->referencia_pago}}</td>
                 {!!Form::hidden('referencia_pago', $order->referencia_pago)!!}

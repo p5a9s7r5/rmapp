@@ -14,7 +14,7 @@
 
     <tr height="50">
        <th width="30%">{!!Form::label('id', 'Id: ')!!}</th>
-       <td>{!!Form::text('codigo_profit', $item->id, ['class' => 'textarea2'])!!}</td>
+       <td>{!!Form::text('codigo_profit', $item->id, ['disabled' => 'disabled', 'class' => 'textarea2'])!!}</td>
     </tr>
     <tr height="50">
        <th>{!!Form::label('titulo', 'Titulo Profit: ')!!}</th>
