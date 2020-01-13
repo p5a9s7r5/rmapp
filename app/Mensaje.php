@@ -9,6 +9,7 @@ class Mensaje extends Model
     protected $table = 'mensajes_enviados';
 
     protected $fillable = [
-        'recordatorio', 'retiro', 'pago', 'motorizado', 'envio', 'despachado', 'factura', 'despacho', 'guia',
+        'recordatorio', 'retiro', 'pago', 'motorizado', 'envio', 'despachado', 'factura', 'despacho', 
+        'guia', 'registrado', 'concretado', 'no_contesta', 'numero_incorrecto', 
     ];
 }

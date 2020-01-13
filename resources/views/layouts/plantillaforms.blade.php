@@ -65,7 +65,7 @@
 
             .textarea0[type=text] {
                 width: 60px;
-                padding: 12px 20px;
+                padding: 12px 10px;
                 margin: 8px 0;
                 box-sizing: border-box;
                 outline: none;}
@@ -74,7 +74,7 @@
 
             .textarea1[type=text] {
                 width: 120px;
-                padding: 12px 20px;
+                padding: 12px 10px;
                 margin: 8px 0;
                 box-sizing: border-box;
                 outline: none;}
@@ -83,7 +83,7 @@
 
             .textarea2[type=text] {
                 width: 180px;
-                padding: 12px 20px;
+                padding: 12px 10px;
                 margin: 8px 0;
                 box-sizing: border-box;
                 outline: none;}
@@ -92,21 +92,12 @@
 
             .textarea3[type=text] {
                 width: 400px;
-                padding: 12px 20px;
+                padding: 12px 10px;
                 margin: 8px 0;
                 box-sizing: border-box;
                 outline: none;}
-            .textarea2[type=text]:focus {
+            .textarea3[type=text]:focus {
                 background-color: lightblue;}
-
-            .informacion {
-                font-size: 20px;
-                height: 30vh;
-                align-items: center;
-                display: flex;
-                justify-content: center;
-                margin-bottom: 30px;
-            }
 
             .imgcabecera {
                 float:center;
@@ -183,6 +174,19 @@
                     background-color: #4CAF50;
                     color: white;}
 
+            #tabla5{
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                border-spacing: 0;
+                width: 60%;
+                border: 1px solid #ddd;
+                margin: auto;}
+                #tabla5 th, #tabla5td {
+                    text-align: center;
+                    padding: 16px;}
+                #tabla5 tr:nth-child(even) {
+                    background-color: #f2f2f2}
+
             input[type=button], input[type=submit], input[type=reset] {
                 background-color: #4CAF50;
                 border: none;
@@ -204,12 +208,76 @@
             }
 
             input[type=email] {
-                border: none;
                 width: 385px;
-                padding: 10px 10px;
+                padding: 12px 10px;
                 text-decoration: none;
                 margin: 4px 2px;
                 cursor: pointer;
+            }
+
+            input[type=date] {
+                background: transparent;
+                border: none;
+                font-size: 12px;
+                height: 30px;
+                padding: 5px;
+                width: 165px;
+                border: 2px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+                background-color: white;
+            }
+
+            input[type=number] {
+                width: 180px;
+                padding: 12px 10px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                outline: none;
+            }
+
+            select {
+                background: transparent;
+                border: none;
+                font-size: 12px;
+                height: 37px;
+                padding: 5px;
+                width: 180px;
+                border: 2px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+                background-color: white;
+            }
+
+            input[type=checkbox] {
+                position: relative;
+	            cursor: pointer;
+            }
+            input[type=checkbox]:before {
+                content: "";
+                display: block;
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                top: 0;
+                left: 0;
+                border: 2px solid #4CAF50;
+                border-radius: 3px;
+                background-color: white;
+            }
+            input[type=checkbox]:checked:after {
+                content: "";
+                display: block;
+                width: 5px;
+                height: 10px;
+                border: solid #4CAF50;
+                border-width: 0 2px 2px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+                position: absolute;
+                top: 2px;
+                left: 6px;
             }
 
         </style>

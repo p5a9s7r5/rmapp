@@ -52,7 +52,7 @@
     </tr>
     <tr height="50">
        <th>Costo</th>
-       <td>{{$order->costo}}</td>
+       <td>{{number_format($order->costo,2, ",", ".")}}</td>
     </tr>
     <tr height="50">
        <th>Cantidad</th>
@@ -64,7 +64,7 @@
     </tr>
     <tr height="50">
        <th>Fecha</th>
-       <td>{{$order->fecha}}</td>
+       <td>{{date('d/m/y H:i', strtotime($order->fecha))}}</td>
     </tr>
     <tr height="50">
        <th>Pedido Profit</th>
@@ -73,6 +73,22 @@
     <tr height="50">
        <th>Estatus</th>
        <td>{{$order->estatus}}</td>
+    </tr>
+    <tr height="50">
+       <th>Fecha Estatus</th>
+       <td>{{date('d/m/y H:i', strtotime($order->fecha_estatus))}}</td>
+    </tr>
+    <tr height="50">
+       <th>Calificacion</th>
+       <td>{{$order->calificacion}}</td>
+    </tr>
+    <tr height="50">
+       <th>Notas Contacto</th>
+       <td>{{$order->contacto}}</td>
+    </tr>
+    <tr height="50">
+       <th>Ultimo Conctacto</th>
+       <td>{{date('d/m/y H:i', strtotime($order->fecha_cont))}}</td>
     </tr>
 
 @if($order->fecha_pago)
@@ -107,7 +123,7 @@
     </tr>
     <tr height="50">
        <th>Fecha</th>
-       <td>{{$order->fecha_pago}}</td>
+       <td>{{date('d/m/y H:i', strtotime($order->fecha_pago))}}</td>
     </tr>
     <tr height="50">
        <th>Banco</th>
@@ -119,7 +135,7 @@
     </tr>
     <tr height="50">
        <th>Monto</th>
-       <td>{{$order->monto_pago}}</td>
+       <td>{{number_format($order->monto_pago,2, ",", ".")}}</td>
     </tr>
     <tr height="50">
        <th>Referencia</th>
@@ -175,6 +191,7 @@
 <table style="margin: 0 auto;">
    <tr>
       <td><button type="button" onclick="history.back();" class="inputbutton">Volver</button></td>
+      <td><input type ='button' class="btn btn-warning"  value = 'Editar Telefono' onclick="location.href = '{{ route('orders.phoneedit', $order->pedidos_id) }}'"/></th>
       @if($order->destinatario)
       <td><input type ='button' class="btn btn-warning"  value = 'Editar Envio' onclick="location.href = '{{ route('orders.shipedit', $order->pedidos_id) }}'"/></th>
       @endif

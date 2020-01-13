@@ -13,15 +13,15 @@
 <table id="tabla1">
     <thead>
     <tr height="50">
-       <th>Despacho</th>
+       <th>Registro</th>
        <th>Seudonimo</th>
-       <th>Fecha</th>
+       <th>Fecha Pago</th>
        <th>Banco</th>
        <th>Banco Origen</th>
        <th>Monto</th>
        <th>Referencia</th>
        <th>Pedido Profit</th>
-       <th>Otros Articulos</th>
+       <th>Otros Pagos</th>
        <th>Factura</th>
        <th>Verificar</th>
        <th>Modificar</th>
@@ -34,22 +34,21 @@
         {!! Form::model($order, ['method' => 'PUT', 'action' => ['AdminOrdersController@updatepay', $order->pedidos_id]]) !!}
 
         <tr height="50">
-            <td>{{$order->despacho}}</td>
-                {!!Form::hidden('despacho', $order->despacho)!!}
+            <td>{{date('d/m H:i', strtotime($order->fecha_estatus))}}</td>
             <td>{{$order->seudonimo}}</td>
-            <td>{{Form::label('fecha_pago', $order->fecha_pago)}}</td>
+            <td>{{Form::label('fecha_pago', date('d/m', strtotime($order->fecha_pago)))}}</td>
                 {!!Form::hidden('fecha_pago', $order->fecha_pago)!!}
             <td>{{$order->banco}}</td>
                 {!!Form::hidden('banco', $order->banco)!!}
             <td>{{$order->interbancario}}</td>
                 {!!Form::hidden('interbancario', $order->interbancario)!!}
-            <td>{{$order->monto_pago}}</td>
+            <td>{{number_format($order->monto_pago,0, ",", ".")}}</td>
                 {!!Form::hidden('monto_pago', $order->monto_pago)!!}
             <td>{{$order->referencia_pago}}</td>
                 {!!Form::hidden('referencia_pago', $order->referencia_pago)!!}
             <td>{{$order->pedido_profit}}</td>
                 {!!Form::hidden('pedido_profit', $order->pedido_profit)!!}
-            @if($order->otros_articulos)
+            @if($order->otros_pagos)
                 <td>Si</td>
             @else
                 <td>No</td>

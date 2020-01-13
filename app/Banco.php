@@ -18,9 +18,8 @@ class Banco extends Model
                     ->banco($banco)
                     ->tipo($tipo)
                     ->fechas($fecha1, $fecha2)
-                    ->orderBy('fecha', 'desc')
+                    ->orderBy('id', 'desc')
                     ->paginate(50);
-        
 
     }
 

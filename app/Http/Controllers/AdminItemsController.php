@@ -93,7 +93,7 @@ class AdminItemsController extends Controller
         $item=Articulo_Profit::findOrFail($id);
         $item->update($request->all());
 
-        return view('admin.items.show', compact('item'));
+        return view('admin.items');
         
     }
 
@@ -128,7 +128,7 @@ class AdminItemsController extends Controller
         }
 
         $items = Articulo_Profit::where('stock_reponer', '>', 0)
-                                ->whereDate('fecha_rep', '<',now()->subDays(60))
+                                ->whereDate('fecha_rep', '<',now()->subDays(30))
                                 ->orderBy('stock_reponer', 'desc')->get();
 
         return view('admin.items.replenish', compact('items'));

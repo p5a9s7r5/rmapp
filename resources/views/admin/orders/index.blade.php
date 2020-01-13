@@ -25,7 +25,7 @@
 <table id="tabla1">
     <thead>
     <tr height="50">
-       <th>Id</th>
+       <th>Fecha</th>
        <th>Nro Oferta</th>
        <th>Seudonimo</th>
        <th>Nombre</th>
@@ -41,12 +41,12 @@
     @if($orders)
         @foreach($orders as $order)
             <tr height="50">
-             <td>{{$order->pedidos_id}}</td>
+             <td>{{date('d/m/y H:i', strtotime($order->fecha))}}</td>
              <td>{{$order->codigo_venta}}</td>
              <td>{{$order->seudonimo}}</td>
              <td>{{$order->nombre}}</td>
              <td>{{$order->titulo_publicacion}}</td>
-             <td>{{$order->costo}}</td>
+             <td>{{number_format($order->costo,0, ",", ".")}}</td>
              <td>{{$order->estatus}}</td>
              <td>{{$order->pedido_profit}}</td>
              <td>{{link_to_route('orders.show', 'Ver Datos', $order->pedidos_id)}}</td>

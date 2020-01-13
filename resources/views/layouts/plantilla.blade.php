@@ -300,9 +300,8 @@
             }
 
             input[type=email] {
-                border: none;
                 width: 385px;
-                padding: 10px 10px;
+                padding: 12px 10px;
                 text-decoration: none;
                 margin: 4px 2px;
                 cursor: pointer;
@@ -313,12 +312,20 @@
                 border: none;
                 font-size: 14px;
                 height: 30px;
-                padding: 1px;
-                width: 150px;
+                padding: 5px;
+                width: 165px;
                 border: 2px solid #ccc;
                 border-radius: 4px;
                 font-size: 16px;
                 background-color: white;
+            }
+
+            input[type=number] {
+                width: 180px;
+                padding: 12px 10px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                outline: none;
             }
 
             select {
@@ -465,7 +472,14 @@
                     <button class="subnavbtn">Pedidos <i class="fa fa-caret-down"></i>	</button>
                         <div class="subnav-content">
                             <a href="/admin/orders">Pedidos</a>
+                            <a href="/admin/orders/contact">Por Contactar</a>
                             <a href="/admin/orders/aprofit">Cargar Profit</a>
+                            <a href="/admin/orders/create">Listado Profit</a>
+                        </div>
+                </div> 
+                <div class="subnav">
+                    <button class="subnavbtn">Envios <i class="fa fa-caret-down"></i>	</button>
+                        <div class="subnav-content">
                             <a href="/admin/orders/shipping">Pedidos por Enviar</a>
                             <a href="/admin/orders/guides">Guias por Cargar</a>
                         </div>

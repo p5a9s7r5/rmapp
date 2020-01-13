@@ -119,7 +119,7 @@
             <td>{!!Form::label('codigo_profit', $ord->codigo_profit)!!}</td>
             <td>{!!Form::label('cantidad', $ord->cantidad)!!}</td>
             <td>{!!Form::label('costo', $ord->costo)!!}</td>
-            <td>{!!Form::label('fecha', $ord->fecha)!!}</td>
+            <td>{!!Form::label('fecha', date('d/m/y H:i', strtotime($ord->fecha)))!!}</td>
             <td>{!!Form::label('estatus', $ord->estatus)!!}</td>
             <td>{!!Form::label('pedido_profit',$ord->pedido_profit, ['class' => 'textarea1'])!!}</td>
         </tr>

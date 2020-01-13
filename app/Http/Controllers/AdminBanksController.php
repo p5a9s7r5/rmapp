@@ -58,7 +58,9 @@ class AdminBanksController extends Controller
         $import->setFecha($request->fecha);
         Excel::import($import, $request->file('file'));
 
-        return ('Numero de ingresos: ' . $import->getRows()); 
+        //return ('Numero de ingresos: ' . $import->getRows()); 
+
+        return redirect('/admin/banks');
 
     }
 

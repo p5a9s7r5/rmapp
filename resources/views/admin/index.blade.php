@@ -31,6 +31,11 @@
         <td>actual</td>
     </tr>
     <tr height="50">
+        <td>Promedio Guias por Cargar</td>
+        <th>{{number_format($prom_actual->prom_enviados,2)}} dias</th>
+        <td>semana actual</td>
+    </tr>
+    <tr height="50">
         <td>Ofertas Recientes</td>
         <td>{{$ofertas}}</td>
         <td>ultimos 7 dias</td>
@@ -41,8 +46,18 @@
         <td>12pm / 5pm</td>
     </tr>
     <tr height="50">
+        <td>Pedidos con Mensajes</td>
+        <td>{{$prom_actual->mensajeria}}</td>
+        <td>12pm / 5pm</td>
+    </tr>
+    <tr height="50">
         <td>Promedio Actual Preguntas</td>
-        <td>{{$prom_actual->promedio_preg}}%</td>
+        <th>{{$prom_actual->promedio_preg}}%</th>
+        <td>desde el lunes</td>
+    </tr>
+    <tr height="50">
+        <td>Promedio Actual Mensajeria</td>
+        <th>{{$prom_actual->promedio_mens}}%</th>
         <td>desde el lunes</td>
     </tr>
     <tr height="50">
@@ -51,24 +66,24 @@
         <td>semana anterior</td>
     </tr>
     <tr height="50">
-        <td>Pedidos con Mensajes Pendientes</td>
-        <td>{{$prom_actual->mensajeria}}</td>
-        <td>12pm / 5pm</td>
-    </tr>
-    <tr height="50">
-        <td>Promedio Actual Mensajeria</td>
-        <td>{{$prom_actual->promedio_mens}}%</td>
-        <td>desde el lunes</td>
-    </tr>
-    <tr height="50">
         <td>Promedio Anterior Mensajeria</td>
         <td>{{$prom_anterior->promedio_mens}}%</td>
         <td>semana anterior</td>
     </tr>
     <tr height="50">
+        <td>Calificaciones Neutrales / Negativas</td>
+        <td>{{$calificaciones}}</td>
+        <td>ultimos 30 dias</td>
+    </tr>
+    <tr height="50">
+        <td>Promedio Calificaciones</td>
+        <th>{{number_format($prom_calificaciones,2)}}%</th>
+        <td>ultimos 30 dias</td>
+    </tr>
+    <tr height="50">
         <td>Tasa / Paridad Actual</td>
         <td>{{number_format($tasa->valor*1000,0, ",", ".")}}</td>
-        <td>{{$tasa->updated_at}}</td>
+        <td>{{date('d/m/Y - H:i', strtotime($tasa->updated_at))}}</td>
     </tr>
 </table>
 

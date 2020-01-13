@@ -36,6 +36,10 @@ Route::put('/admin/orders/shipedit/{id}', 'AdminOrdersController@updateship')->m
 Route::get('/admin/orders/guides', 'AdminOrdersController@guides')->name('orders.guides');
 Route::put('/admin/orders/guides/{id}', 'AdminOrdersController@updateguide');
 Route::get('/admin/orders/pdfguide/{id}', 'AdminOrdersController@pdfguide')->name('orders.pdfguide');
+Route::get('/admin/orders/contact', 'AdminOrdersController@contact')->name('orders.contact');
+Route::put('/admin/orders/contact/{id}', 'AdminOrdersController@updatecontact');
+Route::get('/admin/orders/phoneedit/{id}', 'AdminOrdersController@phoneedit')->name('orders.phoneedit');
+Route::put('/admin/orders/phoneedit/{id}', 'AdminOrdersController@updatephone');
 Route::resource('admin/orders', 'AdminOrdersController');
 
 Route::get('/admin/items/replenish', 'AdminItemsController@replenish')->name('items.replenish');
@@ -48,10 +52,8 @@ Route::resource('admin/banks', 'AdminBanksController');
 Route::get('/admin/taxes', 'AdminTaxesController@index')->name('admin.taxes');
 Route::put('/admin/taxes/{id}', 'AdminTaxesController@update');
 
-Route::get('forms/ml/prueba/', 'FormsController@prueba');
 Route::get('forms/ml/{id}', 'FormsController@mlpay');
 Route::post('forms/ml/', 'FormsController@confirmpay');
 Route::post('forms/ml/confirmpay/', 'FormsController@pay');
 Route::post('forms/ml2/', 'FormsController@confirmship');
 Route::post('forms/ml/confirmship/', 'FormsController@ship');
-

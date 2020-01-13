@@ -120,7 +120,7 @@
        <th >Factura:</th>
        <td>{{$order->factura_profit}}</td>
        <th>Monto:</th>
-       <td>{{$order->monto_pago}}</td>
+       <td>{{number_format($order->monto_pago,0, ",", ".")}}</td>
     </tr>
 </table><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 

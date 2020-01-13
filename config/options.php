@@ -35,4 +35,17 @@ return array(
         'Tealca'     => 'Tealca - Envio Nacional COD',
     ],
 
+    'contacto' => [
+        ''                          => 'Seleccione',
+        'Concretada'                => 'Concretada',
+        'No Compra'                 => 'No Compra',
+        'Contactado - Retiro'       => 'Contactado - Retiro',
+        'Contactado - Envio'        => 'Contactado - Envio',
+        'No Contesta - 1er intento' => 'No Contesta - 1er intento',
+        'No Contesta - 2do intento' => 'No Contesta - 2do intento',
+        'No Contesta - 3er intento' => 'No Contesta - 3er intento',
+        'Sin Numero Registrado'     => 'Sin Numero Registrado',
+        'Numero Incorrecto'         => 'Numero Incorrecto',
+    ],
+
 );

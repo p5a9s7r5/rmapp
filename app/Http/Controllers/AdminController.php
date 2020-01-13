@@ -32,7 +32,13 @@ class AdminController extends Controller
 
         $prom_anterior = Promedio::findOrFail($prom_actual->id - 1);
 
-        return view('admin.index', compact('pagos', 'envios', 'guias', 'tasa', 'ofertas', 'prom_actual', 'prom_anterior'));
+        $pedidos = Ml_pedido::whereDate('fecha', '>=',now()->subDays(31))->count();
+
+        $calificaciones = Ml_pedido::whereDate('fecha', '>=',now()->subDays(31))->where('calificacion', 'negative')->orWhere('calificacion', 'neutral')->count();
+
+        $prom_calificaciones = ($calificaciones / $pedidos) * 100;
+
+        return view('admin.index', compact('pagos', 'envios', 'guias', 'tasa', 'ofertas', 'prom_actual', 'prom_anterior', 'calificaciones', 'prom_calificaciones'));
     }
 
     public function alert($id)

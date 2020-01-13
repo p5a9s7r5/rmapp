@@ -18,7 +18,7 @@ class Articulo_Profit extends Model
 
         if($busqueda != ""){
 
-            $query->where(\DB::raw("CONCAT(titulo, codigo_profit, ml3, ml4)"), "LIKE", "%$busqueda%");
+            $query->where(\DB::raw("CONCAT(titulo, nombre_ml, codigo_profit, ml3, ml4)"), "LIKE", "%$busqueda%");
 
         }
 

@@ -12,7 +12,7 @@ class Ml_pedido extends Model
         'pedido_profit', 'estatus', 'email', 'articulo_cliente', 'otros_articulos', 'cantidad_cliente', 
         'fecha_pago', 'banco', 'interbancario', 'monto_pago', 'referencia_pago', 'otros_pagos', 'email', 
         'despacho', 'estatus', 'destinatario', 'cedula', 'telefono', 'direccion_envio', 'ciudad_envio',
-        'guia_envio',
+        'guia_envio', 'fecha_estatus',
     ];
 
     public function scopeBusqueda ($query, $busqueda)

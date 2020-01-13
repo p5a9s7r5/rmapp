@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\PromediosController;
 use Illuminate\Http\Request;
 use App\Ml_pedido;
 use App\Mensaje;
@@ -64,6 +65,7 @@ class FormsController extends Controller
         $order->email = $request->email;
         $order->despacho = $request->despacho;
         $order->estatus = 'Pago Registrado';
+        $order->fecha_estatus = now();
         $order->save();
 
         $request->session()->flush();
@@ -72,7 +74,10 @@ class FormsController extends Controller
         $mensaje = Mensaje::findOrFail($mensaje_id->id);
         $mensaje->registrado = 2;
         $mensaje->save();
-        
+
+        $fecha_estatus = new PromediosController();
+        $fecha_estatus->fechaestatus($order->fecha, 'registrados');
+
         return view('forms.confirm1');
 
     }
@@ -97,6 +102,7 @@ class FormsController extends Controller
         $order->direccion_envio = $request->direccion_envio;
         $order->ciudad_envio = $request->ciudad_envio;
         $order->estatus = 'Envio Registrado';
+        $order->fecha_estatus = now();
         $order->save();
 
         $request->session()->flush();
@@ -106,12 +112,8 @@ class FormsController extends Controller
         $mensaje->registrado = 2;
         $mensaje->save();
 
-        return view('forms.confirm2');
-
-    }
-
-    public function prueba()
-    {
+        $fecha_estatus = new PromediosController();
+        $fecha_estatus->fechaestatus($order->fecha, 'registrados');
 
         return view('forms.confirm2');
 
